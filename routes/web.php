@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('ObtenetProyectos',  [
+    'uses' => 'Proyectos\ProyectosController@obtener_proyectos',
+    'as' => 'tracking',
+]);
