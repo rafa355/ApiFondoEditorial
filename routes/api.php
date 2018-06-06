@@ -18,8 +18,12 @@ Route::namespace("Api")->group(function(){
 
     Route::get('ObtenetProyectos',  [
         'uses' => 'ProyectosController@obtener_proyectos',
-        'as' => 'tracking',
+        'as' => 'proyectos',
     ]);
 
+    Route::get('ObtenetProyecto/{id}',  [
+        'uses' => 'ProyectosController@obtener_proyecto',
+        'as' => 'proyecto',
+    ]);
     
 });
