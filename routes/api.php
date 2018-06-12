@@ -25,5 +25,15 @@ Route::namespace("Api")->group(function(){
         'uses' => 'ProyectosController@obtener_proyecto',
         'as' => 'proyecto',
     ]);
+
+    Route::get('ObtenerEncargados',  [
+        'uses' => 'EncargadosController@obtener_encargados',
+        'as' => 'encargados',
+    ]);
     
+
+    Route::get('ObtenerEncargado/{id}',  [
+        'uses' => 'EncargadosController@obtener_encargado',
+        'as' => 'encargado',
+    ]);
 });
