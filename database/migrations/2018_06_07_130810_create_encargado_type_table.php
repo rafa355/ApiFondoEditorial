@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProyectosTable extends Migration
+class CreateEncargadoTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateProyectosTable extends Migration
      */
     public function up()
     {
-        Schema::create('proyectos', function (Blueprint $table) {
+        Schema::create('encargado_type', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->text('descripcion');
-            $table->unsignedInteger('proyecto_type_id');
-            $table->foreign('proyecto_type_id')->references('id')->on('proyecto_type');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateProyectosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proyectos');
+        Schema::dropIfExists('encargado_type');
     }
 }
