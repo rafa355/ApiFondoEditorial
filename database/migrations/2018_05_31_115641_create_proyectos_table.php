@@ -17,6 +17,9 @@ class CreateProyectosTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->text('descripcion');
+            $table->date('tiempo_planificado_total');
+            $table->date('tiempo_transcurrido_total');
+            $table->date('tiempo_real_total');
             $table->unsignedInteger('proyecto_type_id');
             $table->foreign('proyecto_type_id')->references('id')->on('proyecto_type');
             $table->timestamps();

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEncargadoTypeTable extends Migration
+class CreateComentariosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateEncargadoTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('responsable_type', function (Blueprint $table) {
+        Schema::create('comentarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->text('conteido');
+            $table->unsignedInteger('adjunto_id');
+            $table->foreign('adjunto_id')->references('id')->on('adjuntos');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateEncargadoTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('responsable_type');
+        Schema::dropIfExists('comentarios');
     }
 }

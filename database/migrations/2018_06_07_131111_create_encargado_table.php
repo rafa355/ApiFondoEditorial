@@ -13,11 +13,11 @@ class CreateEncargadoTable extends Migration
      */
     public function up()
     {
-        Schema::create('encargados', function (Blueprint $table) {
+        Schema::create('responsables', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->unsignedInteger('encargado_type_id');
-            $table->foreign('encargado_type_id')->references('id')->on('encargado_type');
+            $table->unsignedInteger('responsable_type_id');
+            $table->foreign('responsable_type_id')->references('id')->on('responsable_type');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateEncargadoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('encargados');
+        Schema::dropIfExists('responsables');
     }
 }
