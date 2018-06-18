@@ -15,6 +15,7 @@ class CreateSolicitanteTable extends Migration
     {
         Schema::create('solicitantes', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nombre');
             $table->unsignedInteger('solicitante_type_id');
             $table->foreign('solicitante_type_id')->references('id')->on('solicitante_type');
             $table->timestamps();

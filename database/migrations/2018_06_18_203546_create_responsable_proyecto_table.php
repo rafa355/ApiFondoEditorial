@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddEncargadoIdToProyectTable extends Migration
+class CreateResponsableProyectoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class AddEncargadoIdToProyectTable extends Migration
      */
     public function up()
     {
-        Schema::table('proyectos', function (Blueprint $table) {
+        Schema::create('responsable_proyecto', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('proyecto_id');
+            $table->foreign('proyecto_id')->references('id')->on('proyectos');
             $table->unsignedInteger('responsable_id');
             $table->foreign('responsable_id')->references('id')->on('responsables');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +30,6 @@ class AddEncargadoIdToProyectTable extends Migration
      */
     public function down()
     {
-        Schema::table('proyectos', function (Blueprint $table) {
-            $table->dropForeign('proyectos_responsable_id_foreign');
-            $table->dropColumn(['responsable_id']);
-        });
+        Schema::dropIfExists('responsable_proyecto');
     }
 }
