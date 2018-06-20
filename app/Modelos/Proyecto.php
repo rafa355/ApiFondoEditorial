@@ -14,8 +14,9 @@ class Proyecto extends Model
 
     public static function Consulta(){
         $features = DB::table('proyectos')
-            ->select('proyectos.id as id','proyectos.nombre AS nombre','proyectos.created_at AS created_at','encargados.nombre AS encargado')
-            ->leftJoin('encargados', 'proyectos.encargado_id', '=', 'encargados.id')
+            ->select('proyectos.id as id','proyectos.nombre AS nombre','proyectos.created_at AS created_at','responsables.nombre AS responsable')
+            ->leftJoin('responsable_proyecto', 'proyectos.id', '=', 'responsable_proyecto.proyecto_id')
+            ->leftJoin('responsables', 'responsable_proyecto.responsable_id', '=', 'responsables.id')
             ->get();    
         return $features;
       }

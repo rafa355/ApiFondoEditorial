@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Modelos\Encargado;
+use App\Modelos\Responsable;
 
 class EncargadosController extends Controller
 {
     public function obtener_encargados(){
-    	return response()->json(Encargado::Consulta());
+    	return response()->json(Responsable::Consulta());
     }
 
     public function obtener_encargado($id){
-    	return response()->json(Encargado::find($id));
+    	return response()->json(Responsable::find($id));
     }
 }
