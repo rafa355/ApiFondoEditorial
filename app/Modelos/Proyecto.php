@@ -13,12 +13,25 @@ class Proyecto extends Model
     ];
 
     public static function Consulta(){
-        $features = DB::table('proyectos')
-            ->select('proyectos.id as id','proyectos.nombre AS nombre','proyectos.created_at AS created_at','responsables.nombre AS responsable')
+        $features = DB::table('solicitudes')
+            ->select('proyectos.id as id','proyecto_type.nombre AS tipo','solicitudes.nombre AS nombre','proyectos.created_at AS created_at','responsables.nombre AS responsable')
+            ->leftJoin('proyectos', 'solicitudes.id', '=', 'proyectos.solicitud_id')
             ->leftJoin('responsable_proyecto', 'proyectos.id', '=', 'responsable_proyecto.proyecto_id')
             ->leftJoin('responsables', 'responsable_proyecto.responsable_id', '=', 'responsables.id')
+            ->leftJoin('proyecto_type', 'solicitudes.proyecto_type_id', '=', 'proyecto_type.id')
             ->get();    
         return $features;
       }
 
+      public static function Consulta_proyecto($id){
+        $features = DB::table('solicitudes')
+            ->select('proyectos.id as id','proyecto_type.nombre AS tipo','solicitudes.nombre AS nombre','proyectos.created_at AS created_at','responsables.nombre AS responsable')
+            ->leftJoin('proyectos', 'solicitudes.id', '=', 'proyectos.solicitud_id')
+            ->leftJoin('responsable_proyecto', 'proyectos.id', '=', 'responsable_proyecto.proyecto_id')
+            ->leftJoin('responsables', 'responsable_proyecto.responsable_id', '=', 'responsables.id')
+            ->leftJoin('proyecto_type', 'solicitudes.proyecto_type_id', '=', 'proyecto_type.id')
+            ->where('solicitudes.id','=',$id)  
+            ->get();    
+        return $features;
+      }
 }
