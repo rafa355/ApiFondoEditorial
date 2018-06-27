@@ -15,7 +15,8 @@ class Responsable extends Model
 
     public static function Consulta(){
         $features = DB::table('responsables')
-            ->select('id','nombre','created_at')
+            ->select('responsables.nombre as nombre','responsable_type.nombre as tipo')
+            ->leftJoin('responsable_type', 'responsables.responsable_type_id', '=', 'responsable_type.id')
             ->get();    
         return $features;
       }
