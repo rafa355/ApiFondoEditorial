@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::namespace("Api")->group(function(){
- 
+
 
     Route::get('ObtenetProyectos',  [
         'uses' => 'ProyectosController@obtener_proyectos',
@@ -30,10 +30,20 @@ Route::namespace("Api")->group(function(){
         'uses' => 'EncargadosController@obtener_encargados',
         'as' => 'encargados',
     ]);
-    
+
 
     Route::get('ObtenerEncargado/{id}',  [
         'uses' => 'EncargadosController@obtener_encargado',
         'as' => 'encargado',
+    ]);
+
+    Route::get('ObtenerAdjuntos/{etapa}/{id}',  [
+        'uses' => 'EtapasController@obtener_adjuntos_etapa',
+        'as' => 'adjuntos',
+    ]);
+
+    Route::get('ObtenerEtapa/{etapa}/{id}',  [
+        'uses' => 'EtapasController@obtener_etapa',
+        'as' => 'etapa',
     ]);
 });
