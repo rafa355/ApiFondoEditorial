@@ -17,7 +17,7 @@ class EtapaProyecto extends Model
             ->select('etapas_proyecto.status as estado','etapas_proyecto.tiempo_transcurrido as transcurrido','etapas_proyecto.tiempo_estimado as estimado')
             ->where('etapas_proyecto.proyecto_id','=',$id)
             ->where('etapas_proyecto.etapa_type_id','=',$etapa)
-            ->get();
+            ->first();
         return $features;
       }
 
