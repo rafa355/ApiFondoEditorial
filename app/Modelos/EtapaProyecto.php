@@ -22,10 +22,10 @@ class EtapaProyecto extends Model
       }
 
     public static function Consulta_adjuntos($etapa,$id){
-        $features = DB::table('etapas_proyecto')
+        $features = DB::table('adjuntos')
             ->select('adjuntos.ubicacion as archivo','comentarios.conteido as comentario')
-            ->leftJoin('adjuntos', 'etapas_proyecto.id', '=', 'adjuntos.etapa_proyecto_id')
-            ->leftJoin('comentarios', 'adjuntos.id', '=', 'comentarios.adjunto_id')
+            ->Join('comentarios', 'adjuntos.id', '=', 'comentarios.adjunto_id')
+            ->Join('etapas_proyecto', 'adjuntos.etapa_proyecto_id', '=', 'etapas_proyecto.id')
             ->where('etapas_proyecto.proyecto_id','=',$id)
             ->where('etapas_proyecto.etapa_type_id','=',$etapa)
             ->get();
