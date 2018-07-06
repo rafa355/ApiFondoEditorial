@@ -31,10 +31,24 @@ Route::namespace("Api")->group(function(){
         'as' => 'encargados',
     ]);
 
-
     Route::get('ObtenerEncargado/{id}',  [
         'uses' => 'EncargadosController@obtener_encargado',
         'as' => 'encargado',
+    ]);
+
+    Route::post('/CrearSolicitud', [
+        'uses' => 'SolicitudesController@crear_solicitud',
+        'as' => 'crear.solicitud',
+    ]);
+    
+    Route::get('ObtenerSolicitudes',  [
+        'uses' => 'SolicitudesController@obtener_solicitudes',
+        'as' => 'solicitudes',
+    ]);
+
+    Route::get('ObtenerSolicitud/{id}',  [
+        'uses' => 'SolicitudesController@obtener_solicitud',
+        'as' => 'solicitud',
     ]);
 
     Route::get('ObtenerAdjuntos/{etapa}/{id}',  [

@@ -15,8 +15,8 @@ return [
     'supportsCredentials' => false,
     'allowedOrigins' => ['*'],
     'allowedOriginsPatterns' => [],
-    'allowedHeaders' => ['*'],
-    'allowedMethods' => ['*'],
+    'allowedMethods' => [ 'POST', 'PUT',  'DELETE'],
+    'exposedHeaders' => ['DAV', 'content-length', 'Allow'],
     'exposedHeaders' => [],
     'maxAge' => 0,
 
