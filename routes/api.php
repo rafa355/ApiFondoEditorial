@@ -15,7 +15,15 @@ use Illuminate\Http\Request;
 
 Route::namespace("Api")->group(function(){
 
+    Route::get('ObtenerSolicitantes',  [
+        'uses' => 'SolicitantesController@obtener_solicitantes',
+        'as' => 'solicitantes',
+    ]);
 
+    Route::get('ObtenerTiposProyectos',  [
+        'uses' => 'ProyectosController@obtener_tipos_proyectos',
+        'as' => 'tipos_proyectos',
+    ]);
     Route::get('ObtenetProyectos',  [
         'uses' => 'ProyectosController@obtener_proyectos',
         'as' => 'proyectos',
