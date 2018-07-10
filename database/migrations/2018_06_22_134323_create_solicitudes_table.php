@@ -16,11 +16,9 @@ class CreateSolicitudesTable extends Migration
         Schema::create('solicitudes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->text('descripcion');
             $table->unsignedInteger('solicitante_id');
             $table->foreign('solicitante_id')->references('id')->on('solicitantes');
-            $table->unsignedInteger('proyecto_type_id');
-            $table->foreign('proyecto_type_id')->references('id')->on('proyecto_type');
+            $table->enum('publicacion', ['si','no']);
             $table->timestamps();
         });
     }

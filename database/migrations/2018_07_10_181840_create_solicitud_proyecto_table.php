@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSolicitudIdToPtoyectoTable extends Migration
+class CreateSolicitudProyectoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class AddSolicitudIdToPtoyectoTable extends Migration
      */
     public function up()
     {
-        Schema::table('proyectos', function (Blueprint $table) {
+        Schema::create('solicitud_proyecto', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('solicitud_id');
             $table->foreign('solicitud_id')->references('id')->on('solicitudes');
+            $table->unsignedInteger('proyecto_id');
+            $table->foreign('proyecto_id')->references('id')->on('proyectos');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +30,6 @@ class AddSolicitudIdToPtoyectoTable extends Migration
      */
     public function down()
     {
-        Schema::table('proyectos', function (Blueprint $table) {
-            $table->dropForeign('proyectos_solicitud_id_foreign');
-            $table->dropColumn(['solicitud_id']);
-        });
+        Schema::dropIfExists('solicitud_proyecto');
     }
 }
