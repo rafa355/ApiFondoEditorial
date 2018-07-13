@@ -9,7 +9,7 @@ class Solicitudes extends Model
     protected $table = 'solicitudes';
 
     protected $fillable = [
-        'nombre','descripcion','solicitante_id','proyecto_type_id'
+        'nombre','publicacion','solicitante_id',
     ];
 
     public static function Consulta(){

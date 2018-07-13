@@ -9,7 +9,7 @@ class Proyecto extends Model
     protected $table = 'proyectos';
 
     protected $fillable = [
-        'nombre', 
+        'nombre','descripcion','proyecto_type_id','solicitud_id',
     ];
 
     public static function Consulta(){
