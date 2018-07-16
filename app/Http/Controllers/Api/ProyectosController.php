@@ -13,10 +13,10 @@ class ProyectosController extends Controller
     	return response()->json(ProyectoType::all());
     }
     public function obtener_proyectos(){
-    	return response()->json(Proyecto::Consulta());
+    	return response()->json(Proyecto::with('ProyectoType')->get());
     }
 
     public function obtener_proyecto($id){
-    	return response()->json(Proyecto::Consulta_proyecto($id));
+    	return response()->json(Proyecto::with('ProyectoType')->find($id));
     }
 }

@@ -12,6 +12,15 @@ class Solicitudes extends Model
         'nombre','publicacion','solicitante_id',
     ];
 
+    public function solicitante()
+    {
+        return $this->BelongsTo('App\Modelos\Solicitante');
+    }
+    public function proyectos()
+	{
+	 	return $this->hasmany('App\Modelos\Proyecto');
+	}
+
     public static function Consulta(){
         $features = DB::table('solicitudes')
             ->select('proyecto_type.nombre AS tipo','solicitudes.nombre AS nombre','solicitudes.created_at AS creada','solicitantes.nombre AS solicitante')

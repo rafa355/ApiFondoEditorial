@@ -10,22 +10,24 @@ use App\Modelos\Proyecto;
 class SolicitudesController extends Controller
 {
     public function obtener_solicitudes(){
-    	return response()->json(Solicitudes::all());
+    	return response()->json(Solicitudes::with('solicitante')->get());
     }
 
     public function obtener_solicitud($id){
-    	return response()->json(Solicitudes::find($id));
+    	return response()->json(Solicitudes::with('solicitante')->find($id));
     }
 
     public function crear_solicitud(Request $request ){
 
         $solicitud = Solicitudes::create($request->all());
 
-        //dd($solicitud->id);
         foreach($request->proyectos as $proyecto){
-            $proyect = Proyecto::create($proyecto);
-            $proyect->solicitud_id = 4;
-            $proyect->save();
+            $proyect = Proyecto::create([
+                'nombre' => $proyecto['nombre'],
+                'descripcion' => $proyecto['descripcion'],
+                'proyecto_type_id' => $proyecto['proyecto_type_id'],
+                'solicitud_id' => $solicitud->id,
+            ]);
         }
 
     	return response()->json($solicitud);

@@ -19,6 +19,7 @@ class CreateSolicitudesTable extends Migration
             $table->unsignedInteger('solicitante_id');
             $table->foreign('solicitante_id')->references('id')->on('solicitantes');
             $table->enum('publicacion', ['si','no']);
+            $table->enum('status', ['activa','eliminada']);
             $table->timestamps();
         });
     }

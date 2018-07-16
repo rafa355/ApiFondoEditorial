@@ -11,6 +11,9 @@ class ProyectoType extends Model
     protected $fillable = [
         'nombre', 
     ];
+    public function Proyecto()
+	{
+	 	return $this->hasmany('App\Modelos\Proyecto');
+    }
 
-    
     }

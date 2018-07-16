@@ -11,4 +11,9 @@ class Solicitante extends Model
     protected $fillable = [
         'nombre', 
     ];
+
+    public function solicitudes()
+	{
+	 	return $this->hasmany('App\Modelos\Solicitudes');
+	}
 }
