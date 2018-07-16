@@ -8,6 +8,6 @@ use App\Modelos\Solicitante;
 class SolicitantesController extends Controller
 {
     public function obtener_solicitantes(){
-    	return response()->json(Solicitante::all());
+    	return response()->json(Solicitante::orderby('nombre','asc')->get());
     }
 }

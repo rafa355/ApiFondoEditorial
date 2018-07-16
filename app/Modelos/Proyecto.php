@@ -12,9 +12,9 @@ class Proyecto extends Model
         'nombre','descripcion','proyecto_type_id','solicitud_id',
     ];
 
-    public function solicitudes()
+    public function Solicitudes()
     {
-        return $this->BelongsTo('App\Modelos\Solicitudes');
+        return $this->BelongsTo('App\Modelos\Solicitudes','solicitud_id');
     }
     public function ProyectoType()
     {

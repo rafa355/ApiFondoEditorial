@@ -59,6 +59,11 @@ Route::namespace("Api")->group(function(){
         'as' => 'solicitud',
     ]);
 
+    Route::get('ActivarSolicitud/{id}',  [
+        'uses' => 'SolicitudesController@activar_solicitud',
+        'as' => 'activar.solicitud',
+    ]);
+
     Route::get('ObtenerAdjuntos/{etapa}/{id}',  [
         'uses' => 'EtapasController@obtener_adjuntos_etapa',
         'as' => 'adjuntos',
