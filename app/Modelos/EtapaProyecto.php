@@ -9,7 +9,7 @@ class EtapaProyecto extends Model
     protected $table = 'etapas_proyecto';
 
     protected $fillable = [
-        'nombre',
+        'proyecto_id','etapa_type_id'
     ];
 
     public static function Consulta_etapa($etapa,$id){

@@ -52,6 +52,8 @@ Route::namespace("Api")->group(function(){
         'uses' => 'EncargadosController@obtener_encargados_type',
         'as' => 'encargados_type',
     ]);
+
+    //solicitudes
     Route::post('/CrearSolicitud', [
         'uses' => 'SolicitudesController@crear_solicitud',
         'as' => 'crear.solicitud',
@@ -72,6 +74,12 @@ Route::namespace("Api")->group(function(){
         'as' => 'activar.solicitud',
     ]);
 
+    Route::get('EliminarSolicitud/{id}',  [
+        'uses' => 'SolicitudesController@eliminar_solicitud',
+        'as' => 'activar.solicitud',
+    ]);
+
+    //Etapas y Adjuntos
     Route::get('ObtenerAdjuntos/{etapa}/{id}',  [
         'uses' => 'EtapasController@obtener_adjuntos_etapa',
         'as' => 'adjuntos',
@@ -79,6 +87,11 @@ Route::namespace("Api")->group(function(){
 
     Route::get('ObtenerEtapa/{etapa}/{id}',  [
         'uses' => 'EtapasController@obtener_etapa',
+        'as' => 'etapa',
+    ]);
+
+    Route::get('ActivarEtapa/{etapa}/{proyecto}',  [
+        'uses' => 'EtapasController@activar_etapa',
         'as' => 'etapa',
     ]);
 });

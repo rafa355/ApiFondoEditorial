@@ -10,7 +10,7 @@ use App\Modelos\Proyecto;
 class SolicitudesController extends Controller
 {
     public function obtener_solicitudes(){
-    	return response()->json(Solicitudes::with('solicitante')->with('Proyecto')->get());
+    	return response()->json(Solicitudes::where('status','!=','eliminada')->with('solicitante')->with('Proyecto')->get());
     }
 
     public function obtener_solicitud($id){
@@ -23,7 +23,13 @@ class SolicitudesController extends Controller
         $solicitud->save();
     	return response()->json('Se activo la solicitud');
     }
-    
+
+    public function eliminar_solicitud($id){
+        $solicitud = Solicitudes::find($id);
+        $solicitud->status = 'eliminada';
+        $solicitud->save();
+    	return response()->json('Se activo la solicitud');
+    }
     public function crear_solicitud(Request $request ){
 
         $solicitud = Solicitudes::create($request->all());
