@@ -10,14 +10,12 @@ class Responsable extends Model
     protected $table = 'responsables';
 
     protected $fillable = [
-        'nombre', 
+        'nombre', 'responsable_type_id'
     ];
 
-    public static function Consulta(){
-        $features = DB::table('responsables')
-            ->select('responsables.nombre as nombre','responsable_type.nombre as tipo')
-            ->leftJoin('responsable_type', 'responsables.responsable_type_id', '=', 'responsable_type.id')
-            ->get();    
-        return $features;
-      }
+    public function tipo()
+    {
+        return $this->BelongsTo('App\Modelos\ResponsableType','responsable_type_id');
     }
+
+}

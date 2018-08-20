@@ -11,4 +11,5 @@ class ResponsableType extends Model
     protected $fillable = [
         'nombre', 
     ];
+
 }

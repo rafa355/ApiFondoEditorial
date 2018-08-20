@@ -24,16 +24,20 @@ Route::namespace("Api")->group(function(){
         'uses' => 'ProyectosController@obtener_tipos_proyectos',
         'as' => 'tipos_proyectos',
     ]);
-    Route::get('ObtenetProyectos',  [
+    Route::get('ObtenerProyectos',  [
         'uses' => 'ProyectosController@obtener_proyectos',
         'as' => 'proyectos',
     ]);
 
-    Route::get('ObtenetProyecto/{id}',  [
+    Route::get('ObtenerProyecto/{id}',  [
         'uses' => 'ProyectosController@obtener_proyecto',
         'as' => 'proyecto',
     ]);
-
+    //encargados
+    Route::post('/CrearEncargados', [
+        'uses' => 'EncargadosController@crear_encargado',
+        'as' => 'crear.solicitud',
+    ]);
     Route::get('ObtenerEncargados',  [
         'uses' => 'EncargadosController@obtener_encargados',
         'as' => 'encargados',
@@ -44,6 +48,10 @@ Route::namespace("Api")->group(function(){
         'as' => 'encargado',
     ]);
 
+    Route::get('ObtenerEncargadostype',  [
+        'uses' => 'EncargadosController@obtener_encargados_type',
+        'as' => 'encargados_type',
+    ]);
     Route::post('/CrearSolicitud', [
         'uses' => 'SolicitudesController@crear_solicitud',
         'as' => 'crear.solicitud',
