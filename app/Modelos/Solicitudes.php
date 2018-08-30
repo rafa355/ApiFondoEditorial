@@ -16,7 +16,7 @@ class Solicitudes extends Model
     {
         return $this->BelongsTo('App\Modelos\Solicitante');
     }
-    public function Proyecto()
+    public function proyecto()
 	{
          return $this->hasMany('App\Modelos\Proyecto', 'solicitud_id');
 	}

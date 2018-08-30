@@ -16,9 +16,9 @@ class Proyecto extends Model
     {
         return $this->BelongsTo('App\Modelos\Solicitudes','solicitud_id');
     }
-    public function ProyectoType()
+    public function proyectotype()
     {
-        return $this->BelongsTo('App\Modelos\ProyectoType');
+        return $this->BelongsTo('App\Modelos\ProyectoType','proyecto_type_id');
     }
 
 }

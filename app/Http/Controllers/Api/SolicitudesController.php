@@ -14,7 +14,7 @@ class SolicitudesController extends Controller
     }
 
     public function obtener_solicitud($id){
-    	return response()->json(Solicitudes::with('solicitante')->find($id));
+    	return response()->json(Solicitudes::with('proyecto','proyecto.proyectotype')->with('solicitante')->find($id));
     }
 
     public function activar_solicitud($id){
