@@ -37,11 +37,17 @@ class EncargadosController extends Controller
     }
 
     public function asignar_encargado($proyecto,$encargado ){
-        $encargado_proyecto = ResponsableProyecto::create([
-            'proyecto_id' => $proyecto,
-            'responsable_id' => $encargado,
-            'tipo' => 'principal',
-        ]);
+        $encargado_proyecto = ResponsableProyecto::where('proyecto_id',$proyecto)->where('tipo','principal')->first();
+        if(!($encargado_proyecto)){
+            $encargado_proyecto = ResponsableProyecto::create([
+                'proyecto_id' => $proyecto,
+                'responsable_id' => $encargado,
+                'tipo' => 'principal',
+            ]);
+        }else{
+            $encargado_proyecto->responsable_id = $encargado;
+            $encargado_proyecto->save();
+        }
 
     	return response()->json($encargado_proyecto);
     }

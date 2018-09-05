@@ -9,6 +9,10 @@ class Adjunto extends Model
     protected $table = 'adjuntos';
 
     protected $fillable = [
-        'nombre', 
+        'ubicacion', 'etapa_proyecto_id',
     ];
+    public function comentarios()
+	{
+         return $this->hasMany('App\Modelos\Comentarios', 'adjunto_id');
+	}
 }
