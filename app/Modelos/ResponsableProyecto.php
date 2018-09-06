@@ -9,7 +9,7 @@ class ResponsableProyecto extends Model
     protected $table = 'responsable_proyecto';
 
     protected $fillable = [
-        'proyecto_id','responsable_id'
+        'proyecto_id','responsable_id','tipo'
     ];
 
     public function encargado()
