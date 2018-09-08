@@ -91,11 +91,15 @@ Route::namespace("Api")->group(function(){
         'uses' => 'EtapasController@obtener_adjuntos_etapa',
         'as' => 'adjuntos',
     ]);
-    Route::post('CrearAdjunto/{etapa}/{id}',  [
+    Route::post('CrearAdjunto/{id}',  [
         'uses' => 'AdjuntosController@crear_adjunto',
         'as' => 'crear.adjunto',
     ]);
 
+    Route::post('CargarImagen/{etapa}/{id}',  [
+        'uses' => 'AdjuntosController@cargar_imagen',
+        'as' => 'crear.imagen',
+    ]);
     Route::get('ObtenerEtapa/{etapa}/{id}',  [
         'uses' => 'EtapasController@obtener_etapa',
         'as' => 'etapa',
