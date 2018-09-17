@@ -14,7 +14,7 @@ class AdjuntosController extends Controller
 
         $comentario = Comentarios::create([
             //ojo aqui es contenido
-            'conteido' => $request->comentario,
+            'contenido' => $request->comentario,
             'adjunto_id' => $id,
         ]);
 

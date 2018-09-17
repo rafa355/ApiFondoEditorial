@@ -44,6 +44,9 @@ class EtapasController extends Controller
         $etapa_proyecto->status = 2;
         $etapa_proyecto->save();
 
+        if($etapa == 3){
+            return response()->json('FInalizado');
+        }else{
         $ultimo_adjunto =  Adjunto::where('etapa_proyecto_id',$etapa_proyecto->id)->latest()->first();
         $ultimo_comentario =  Comentarios::where('adjunto_id',$ultimo_adjunto->id)->latest()->first();
 
@@ -59,10 +62,11 @@ class EtapasController extends Controller
 
         $nuevo_comentario = Comentarios::create([
             //ojo aqui es contenido
-            'conteido' => $ultimo_comentario->conteido,
+            'contenido' => $ultimo_comentario->contenido,
             'adjunto_id' => $nuevo_adjunto->id,
         ]);
 
-    	return response()->json($etapa_proyecto_siguiente);
+        return response()->json($etapa_proyecto_siguiente);
+        }
     }
 }

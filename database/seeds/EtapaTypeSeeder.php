@@ -19,17 +19,12 @@ class EtapaTypeSeeder extends Seeder
 
       	EtapaProyectoType::create([
 	        'id' => 2,
-	        'nombre' => 'Diagramacion',	       
+	        'nombre' => 'Diagramacion y Revision',	       
       	]);
 
       	EtapaProyectoType::create([
 	        'id' => 3,
-	        'nombre' => 'Revision y Correccion',	       
-		  ]);
-		
-		EtapaProyectoType::create([
-	        'id' => 4,
 	        'nombre' => 'Publicacion',	       
-          ]);
+		  ]);
     }
 }
