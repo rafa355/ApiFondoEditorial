@@ -119,4 +119,23 @@ Route::namespace("Api")->group(function(){
         'uses' => 'EtapasController@consultar_etapa',
         'as' => 'etapa',
     ]);
+
+
+    Route::get('sendemail', function () {
+
+        $data = array(
+            'name' => "Learning Laravel",
+        );
+    
+        Mail::send('emails.welcome', $data, function ($message) {
+    
+            $message->from('rafa350.rr@gmail.com', 'Fondo Editorial');
+    
+            $message->to('rafa350.rr@gmail.com')->subject('Probando correo de pasantia');
+    
+        });
+    
+        return "Your email has been sent successfully";
+    
+    });
 });

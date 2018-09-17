@@ -13,9 +13,7 @@ class ProyectosController extends Controller
     	return response()->json(ProyectoType::all());
     }
     public function obtener_proyectos(){
-    	return response()->json(Proyecto::whereHas('Solicitudes', function ($query) {
-            $query->where('status', '=', 'activa');
-        })->with('Solicitudes')->with('proyectotype')->get());
+    	return response()->json(Proyecto::Proyectos());
     }
 
     public function obtener_proyecto($id){

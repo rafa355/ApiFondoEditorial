@@ -16,5 +16,9 @@ class ResponsableProyecto extends Model
     {
         return $this->BelongsTo('App\Modelos\Responsable','responsable_id');
     }
+    public function proyecto()
+    {
+        return $this->BelongsTo('App\Modelos\Proyecto','proyecto_id');
+    }
 
 }
