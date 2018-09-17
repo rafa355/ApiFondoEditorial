@@ -25,13 +25,35 @@ class AdjuntosController extends Controller
         $etapa_proyecto = EtapaProyecto::where('proyecto_id',$id)->where('etapa_type_id',$etapa)->first();
         $imagen_nombre = $_FILES['imagenPropia']['name']; 
         $directorio_final = public_path('archivos/').$imagen_nombre;  
+        $ultimo_adjunto =  Adjunto::where('etapa_proyecto_id',$etapa_proyecto->id)->latest()->first();
 
         if(isset($_FILES['imagenPropia'])){
           if(move_uploaded_file($_FILES['imagenPropia']['tmp_name'],$directorio_final )){
-            $adjunto = Adjunto::create([
-                'ubicacion' => $directorio_final,
-                'etapa_proyecto_id' => $etapa_proyecto->id,
-            ]);
+            if($etapa== 2){
+                if($ultimo_adjunto->status == 3 || $ultimo_adjunto->status == 1 ){
+                $adjunto = Adjunto::create([
+                    'ubicacion' => $directorio_final,
+                    'etapa_proyecto_id' => $etapa_proyecto->id,
+                    'status' => 2,
+                ]);
+                $etapa_proyecto->status = 3;
+                $etapa_proyecto->save();
+                }else{
+                    $adjunto = Adjunto::create([
+                        'ubicacion' => $directorio_final,
+                        'etapa_proyecto_id' => $etapa_proyecto->id,
+                        'status' => 3,
+                    ]);
+                    $etapa_proyecto->status = 1;
+                    $etapa_proyecto->save();
+                }
+            }else{
+                $adjunto = Adjunto::create([
+                    'ubicacion' => $directorio_final,
+                    'etapa_proyecto_id' => $etapa_proyecto->id,
+                ]);
+            }
+
             return response()->json($adjunto->id);
             }else{
                 return response()->json("que va");

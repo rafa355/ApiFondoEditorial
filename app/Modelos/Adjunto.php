@@ -9,7 +9,7 @@ class Adjunto extends Model
     protected $table = 'adjuntos';
 
     protected $fillable = [
-        'ubicacion', 'etapa_proyecto_id',
+        'ubicacion', 'etapa_proyecto_id','status'
     ];
     public function comentarios()
 	{

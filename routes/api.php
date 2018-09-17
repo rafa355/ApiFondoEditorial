@@ -109,4 +109,14 @@ Route::namespace("Api")->group(function(){
         'uses' => 'EtapasController@activar_etapa',
         'as' => 'etapa',
     ]);
+
+    Route::get('FinalizarEtapa/{etapa}/{proyecto}',  [
+        'uses' => 'EtapasController@finalizar_etapa',
+        'as' => 'etapa',
+    ]);
+
+    Route::get('ConsultarEtapa/{etapa}/{proyecto}',  [
+        'uses' => 'EtapasController@consultar_etapa',
+        'as' => 'etapa',
+    ]);
 });
