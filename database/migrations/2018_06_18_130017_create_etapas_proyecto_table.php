@@ -20,8 +20,8 @@ class CreateEtapasProyectoTable extends Migration
             $table->unsignedInteger('etapa_type_id');
             $table->foreign('etapa_type_id')->references('id')->on('etapas_type');
             $table->integer('status')->default(1);
-            $table->date('tiempo_transcurrido')->nullable();
-            $table->date('tiempo_estimado')->nullable();
+            $table->string('tiempo_transcurrido')->nullable();
+            $table->date('tiempo_estimado');
             $table->timestamps();
         });
     }

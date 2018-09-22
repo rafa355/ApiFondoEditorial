@@ -105,12 +105,12 @@ Route::namespace("Api")->group(function(){
         'as' => 'etapa',
     ]);
 
-    Route::get('ActivarEtapa/{etapa}/{proyecto}',  [
+    Route::post('ActivarEtapa/',  [
         'uses' => 'EtapasController@activar_etapa',
         'as' => 'etapa',
     ]);
 
-    Route::get('FinalizarEtapa/{etapa}/{proyecto}',  [
+    Route::post('FinalizarEtapa/',  [
         'uses' => 'EtapasController@finalizar_etapa',
         'as' => 'etapa',
     ]);

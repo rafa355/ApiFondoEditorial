@@ -9,12 +9,12 @@ class Proyecto extends Model
     protected $table = 'proyectos';
 
     protected $fillable = [
-        'nombre','descripcion','proyecto_type_id','solicitud_id',
+        'nombre','descripcion','proyecto_type_id','solicitud_id','tiempo_planificado_total'
     ];
 
     public static function Proyectos(){
         $features = DB::table('solicitudes')
-            ->select('proyectos.id','responsables.nombre as responsable','proyectos.nombre as nombre','proyectos.created_at','proyecto_type.nombre as tipo')
+            ->select('proyectos.id','responsables.nombre as responsable','proyectos.nombre as nombre','proyectos.created_at','proyecto_type.nombre as tipo','proyectos.tiempo_planificado_total as fecha_estimada')
             ->leftJoin('proyectos', 'solicitudes.id', '=', 'proyectos.solicitud_id')
             ->leftJoin('proyecto_type', 'proyectos.proyecto_type_id', '=', 'proyecto_type.id')
             ->leftJoin('responsable_proyecto', 'proyectos.id', '=', 'responsable_proyecto.proyecto_id')
