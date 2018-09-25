@@ -18,6 +18,11 @@ class EtapasController extends Controller
     }
 
     public function obtener_etapa($etapa,$id){
+        $now = new \DateTime();
+        $fecha = EtapaProyecto::where('etapa_type_id',$etapa)->where('proyecto_id',$id)->where('status',1)->first();
+        if(!empty($fecha)){$fechaF = $fecha->created_at->diff($now);
+            $tiempo_transcurrido = EtapaProyecto::where('etapa_type_id',$etapa)->where('proyecto_id',$id)->update(['tiempo_transcurrido' => $fechaF->format("%D:%H:%I:%S")]);
+        }
     	return response()->json(EtapaProyecto::Consulta_etapa($etapa,$id));
     }
 
@@ -25,34 +30,38 @@ class EtapasController extends Controller
     public function consultar_etapa($etapa,$proyecto){
 
         $etapa_proyecto =  EtapaProyecto::where('etapa_type_id',$etapa)->where('proyecto_id',$proyecto)->first();
+
     	return response()->json($etapa_proyecto);
     }
 
-    public function activar_etapa($etapa,$proyecto){
-
+    public function activar_etapa(Request $request){
+        $estimado = explode("T",$request->estimado);
         $etapa_proyecto =  EtapaProyecto::create([
-            'etapa_type_id' => $etapa,
-            'proyecto_id' => $proyecto,
+            'etapa_type_id' => $request->etapa,
+            'proyecto_id' => $request->proyecto,
+            'tiempo_estimado' => $estimado[0],
         ]);
 
     	return response()->json($etapa_proyecto);
     }
 
-    public function finalizar_etapa($etapa,$proyecto){
+    public function finalizar_etapa(Request $request){
+        $estimado = explode("T",$request->estimado);
 
-        $etapa_proyecto =  EtapaProyecto::where('etapa_type_id',$etapa)->where('proyecto_id',$proyecto)->first();
+        $etapa_proyecto =  EtapaProyecto::where('etapa_type_id',$request->etapa)->where('proyecto_id',$request->proyecto)->first();
         $etapa_proyecto->status = 2;
         $etapa_proyecto->save();
 
-        if($etapa == 3){
+        if($request->etapa == 3){
             return response()->json('FInalizado');
         }else{
         $ultimo_adjunto =  Adjunto::where('etapa_proyecto_id',$etapa_proyecto->id)->latest()->first();
         $ultimo_comentario =  Comentarios::where('adjunto_id',$ultimo_adjunto->id)->latest()->first();
 
         $etapa_proyecto_siguiente =  EtapaProyecto::create([
-            'etapa_type_id' => $etapa+1,
-            'proyecto_id' => $proyecto,
+            'etapa_type_id' => $request->etapa+1,
+            'proyecto_id' => $request->proyecto,
+            'tiempo_estimado' => $estimado[0],
         ]);
 
         $nuevo_adjunto = Adjunto::create([

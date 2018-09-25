@@ -105,12 +105,12 @@ Route::namespace("Api")->group(function(){
         'as' => 'etapa',
     ]);
 
-    Route::get('ActivarEtapa/{etapa}/{proyecto}',  [
+    Route::post('ActivarEtapa/',  [
         'uses' => 'EtapasController@activar_etapa',
         'as' => 'etapa',
     ]);
 
-    Route::get('FinalizarEtapa/{etapa}/{proyecto}',  [
+    Route::post('FinalizarEtapa/',  [
         'uses' => 'EtapasController@finalizar_etapa',
         'as' => 'etapa',
     ]);
@@ -120,22 +120,22 @@ Route::namespace("Api")->group(function(){
         'as' => 'etapa',
     ]);
 
+    //Contadores
+    Route::get('ProduccionTotal/',  [
+        'uses' => 'ContadorController@produccion',
+        'as' => 'etapa',
+    ]);
+    Route::get('EnPreliminar/',  [
+        'uses' => 'ContadorController@preliminar',
+        'as' => 'etapa',
+    ]);
+    Route::get('EnDiagramacion/',  [
+        'uses' => 'ContadorController@diagramacion',
+        'as' => 'etapa',
+    ]);
+    Route::get('EnPublicacion/',  [
+        'uses' => 'ContadorController@publicacion',
+        'as' => 'etapa',
+    ]);
 
-    Route::get('sendemail', function () {
-
-        $data = array(
-            'name' => "Learning Laravel",
-        );
-    
-        Mail::send('emails.welcome', $data, function ($message) {
-    
-            $message->from('rafa350.rr@gmail.com', 'Fondo Editorial');
-    
-            $message->to('rafa350.rr@gmail.com')->subject('Probando correo de pasantia');
-    
-        });
-    
-        return "Your email has been sent successfully";
-    
-    });
 });

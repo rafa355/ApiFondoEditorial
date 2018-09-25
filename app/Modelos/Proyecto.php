@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Modelos;
+use App\Modelos\Proyecto;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -9,19 +10,20 @@ class Proyecto extends Model
     protected $table = 'proyectos';
 
     protected $fillable = [
-        'nombre','descripcion','proyecto_type_id','solicitud_id',
+        'nombre','descripcion','proyecto_type_id','solicitud_id','tiempo_planificado_total','tiempo_transcurrido_total'
     ];
 
     public static function Proyectos(){
-        $features = DB::table('solicitudes')
-            ->select('proyectos.id','responsables.nombre as responsable','proyectos.nombre as nombre','proyectos.created_at','proyecto_type.nombre as tipo')
+        $proyectos = DB::table('solicitudes')
+            ->select('proyectos.id','responsables.nombre as responsable','proyectos.nombre as nombre','proyectos.created_at','proyecto_type.nombre as tipo','proyectos.tiempo_planificado_total as fecha_estimada','proyectos.tiempo_transcurrido_total as tiempo_transcurrido')
             ->leftJoin('proyectos', 'solicitudes.id', '=', 'proyectos.solicitud_id')
             ->leftJoin('proyecto_type', 'proyectos.proyecto_type_id', '=', 'proyecto_type.id')
             ->leftJoin('responsable_proyecto', 'proyectos.id', '=', 'responsable_proyecto.proyecto_id')
             ->leftJoin('responsables', 'responsable_proyecto.responsable_id', '=', 'responsables.id')
             ->where('solicitudes.status','=','activa')
             ->get();
-        return $features;
+
+        return $proyectos;
       }
 
     public function Solicitudes()

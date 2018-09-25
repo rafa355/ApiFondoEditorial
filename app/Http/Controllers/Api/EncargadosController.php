@@ -22,7 +22,7 @@ class EncargadosController extends Controller
         if(!empty($principal)){
             return response()->json($principal);
         }else{
-            return response()->json("sin asignar");
+            return response()->json($principal);
         }
     }
     public function obtener_encargado($id){

@@ -35,11 +35,13 @@ class SolicitudesController extends Controller
         $solicitud = Solicitudes::create($request->all());
 
         foreach($request->proyectos as $proyecto){
+            $fecha =explode("T",$proyecto['tiempo_planificado_total']);
             $proyect = Proyecto::create([
                 'nombre' => $proyecto['nombre'],
                 'descripcion' => $proyecto['descripcion'],
                 'proyecto_type_id' => $proyecto['proyecto_type_id'],
                 'solicitud_id' => $solicitud->id,
+                'tiempo_planificado_total' => $fecha[0],
             ]);
         }
 
