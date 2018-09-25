@@ -36,11 +36,6 @@ class EncargadosController extends Controller
 
         $encargado = Responsable::create($request->all());
 
-        $data = array('name' => "Learning Laravel",);
-       /* Mail::send('emails.welcome', $data, function ($message) {
-            $message->from('rafa350.rr@gmail.com', 'Fondo Editorial');
-            $message->to('rafa350.rr@gmail.com')->subject('Creacion ');
-        });*/
         Mail::to('rafa350.rr@gmail.com')->send(new Notificaciones('Se registro nuevo responsable.'));
 
     	return response()->json($encargado);
