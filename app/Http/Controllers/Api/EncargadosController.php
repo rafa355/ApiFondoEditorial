@@ -26,7 +26,8 @@ class EncargadosController extends Controller
         }
     }
     public function obtener_encargado($id){
-    	return response()->json(Responsable::find($id));
+        return response()->json(Responsable::find($id));
+        
     }
     public function obtener_encargados_type(){
     	return response()->json(ResponsableType::all());
