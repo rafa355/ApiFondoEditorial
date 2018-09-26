@@ -13,10 +13,10 @@ class ContadorController extends Controller
     	return response()->json(Proyecto::All()->count());
     }
     public function preliminar(){
-    	return response()->json(EtapaProyecto::where('etapa_type_id',1)->count());
+    	return response()->json(EtapaProyecto::where('etapa_type_id',1)->where('status',1)->count());
     }
     public function diagramacion(){
-    	return response()->json(EtapaProyecto::where('etapa_type_id',2)->count());
+    	return response()->json(EtapaProyecto::where('etapa_type_id',2)->where('status',1)->count());
     }
     public function publicacion(){
     	return response()->json(EtapaProyecto::where('etapa_type_id',3)->count());
