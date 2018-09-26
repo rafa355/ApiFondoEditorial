@@ -76,7 +76,7 @@ Route::namespace("Api")->group(function(){
         'as' => 'solicitud',
     ]);
 
-    Route::get('ActivarSolicitud/{id}',  [
+    Route::post('ActivarSolicitud/{id}',  [
         'uses' => 'SolicitudesController@activar_solicitud',
         'as' => 'activar.solicitud',
     ]);

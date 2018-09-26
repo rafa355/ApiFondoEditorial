@@ -9,7 +9,7 @@ class Solicitudes extends Model
     protected $table = 'solicitudes';
 
     protected $fillable = [
-        'nombre','publicacion','solicitante_id',
+        'nombre','publicacion','solicitante_id','descripcion',
     ];
 
     public function solicitante()
