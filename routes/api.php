@@ -14,10 +14,20 @@ use Illuminate\Http\Request;
 */
 
 Route::namespace("Api")->group(function(){
-
+    //solicitantes
     Route::get('ObtenerSolicitantes',  [
         'uses' => 'SolicitantesController@obtener_solicitantes',
         'as' => 'solicitantes',
+    ]);
+
+    Route::post('/CrearSolicitante', [
+        'uses' => 'SolicitantesController@crear_solicitante',
+        'as' => 'crear.solicitante',
+    ]);
+
+    Route::get('EliminarSolicitante/{id}',  [
+        'uses' => 'SolicitantesController@eliminar_solicitante',
+        'as' => 'eliminar.solicitante',
     ]);
 
     Route::get('ObtenerTiposProyectos',  [
