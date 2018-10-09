@@ -13,12 +13,10 @@ class SolicitanteTypeSeeder extends Seeder
     public function run()
     {
         SolicitanteType::create([
-	        'id' => 1,
 	        'nombre' => 'Cliente',	       
       	]);
 
       	SolicitanteType::create([
-	        'id' => 2,
 	        'nombre' => 'Usuario',	       
       	]);
     }

@@ -13,7 +13,6 @@ class ResponsableTypeSeeder extends Seeder
     public function run()
     {
         ResponsableType::create([
-	        'id' => 1,
 	        'nombre' => 'Diseñador',	       
       	]);
 
