@@ -15,11 +15,8 @@ class SolicitantesController extends Controller
     }
 
     public function crear_solicitante(Request $request ){
-
         $solicitante = Solicitante::create($request->all());
-
         Mail::to('rafa350.rr@gmail.com')->send(new Notificaciones('Se registro nuevo solicitante.'));
-
     	return response()->json($solicitante);
     }
 

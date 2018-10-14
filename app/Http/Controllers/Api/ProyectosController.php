@@ -8,10 +8,13 @@ use App\Modelos\Proyecto;
 use App\Modelos\ProyectoType;
 use App\Modelos\EtapaProyecto;
 
+use Mail;
+use App\Mail\Notificaciones;
+
 class ProyectosController extends Controller
 {
     public function obtener_tipos_proyectos(){
-    	return response()->json(ProyectoType::all());
+    	return response()->json(ProyectoType::where('status',1)->orderby('nombre','asc')->get());
     }
     public function obtener_proyectos(){
         
@@ -33,5 +36,18 @@ class ProyectosController extends Controller
 
     public function obtener_proyecto($id){
     	return response()->json(Proyecto::with('proyectotype')->find($id));
+    }
+
+    public function crear_tipo_proyecto(Request $request ){
+        $proyecto = ProyectoType::create($request->all());
+        Mail::to('rafa350.rr@gmail.com')->send(new Notificaciones('Se registro nuevo tipo de proyecto.'));
+    	return response()->json($proyecto);
+    }
+
+    public function eliminar_tipo_proyecto($id){
+        $tipo = ProyectoType::find($id);
+        $tipo->status = 'eliminado';
+        $tipo->save();
+    	return response()->json('Se Elimino');
     }
 }

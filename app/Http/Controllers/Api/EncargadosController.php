@@ -14,7 +14,7 @@ use App\Mail\Notificaciones;
 class EncargadosController extends Controller
 {
     public function obtener_encargados(){
-    	return response()->json(Responsable::with('tipo')->get());
+    	return response()->json(Responsable::with('tipo')->orderby('nombre','asc')->get());
     }
 
     public function obtener_principal($proyecto){

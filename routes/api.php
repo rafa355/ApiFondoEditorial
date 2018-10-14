@@ -29,14 +29,21 @@ Route::namespace("Api")->group(function(){
         'uses' => 'SolicitantesController@eliminar_solicitante',
         'as' => 'eliminar.solicitante',
     ]);
-
+    Route::post('/CrearTipoProyecto', [
+        'uses' => 'ProyectosController@crear_tipo_proyecto',
+        'as' => 'crear.tipo',
+    ]);
     Route::get('ObtenerTiposProyectos',  [
         'uses' => 'ProyectosController@obtener_tipos_proyectos',
         'as' => 'tipos_proyectos',
     ]);
+    Route::get('EliminarTipoProyecto/{id}',  [
+        'uses' => 'ProyectosController@eliminar_tipo_proyecto',
+        'as' => 'eliminar.tipo',
+    ]);
     Route::get('ObtenerProyectos',  [
         'uses' => 'ProyectosController@obtener_proyectos',
-        'as' => 'proyectos',
+        'as' => 'eliminar.tipos',
     ]);
 
     Route::get('ObtenerProyecto/{id}',  [
@@ -69,7 +76,11 @@ Route::namespace("Api")->group(function(){
         'uses' => 'EncargadosController@obtener_encargados_type',
         'as' => 'encargados_type',
     ]);
-
+    //Proyecciones
+    Route::get('ObtenerProyecciones',  [
+        'uses' => 'SolicitudesController@obtener_proyecciones',
+        'as' => 'proyecciones',
+    ]);
     //solicitudes
     Route::post('/CrearSolicitud', [
         'uses' => 'SolicitudesController@crear_solicitud',
