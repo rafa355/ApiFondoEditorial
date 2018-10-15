@@ -8,6 +8,8 @@ use App\Modelos\Solicitudes;
 use App\Modelos\Proyecto;
 use App\Modelos\Proyeccion;
 
+use Mail;
+use App\Mail\Notificaciones;
 class SolicitudesController extends Controller
 {
     public function obtener_solicitudes(){
@@ -64,5 +66,9 @@ class SolicitudesController extends Controller
     }
     public function obtener_proyecciones(){
     	return response()->json(Proyeccion::with('Solicitudes')->get());
+    }
+    public function enviar_mensaje(Request $request ){
+        Mail::to($request->correo)->send(new Notificaciones($request->mensaje));
+    	return response()->json("mensaje enviado");
     }
 }

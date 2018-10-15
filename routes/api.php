@@ -81,6 +81,10 @@ Route::namespace("Api")->group(function(){
         'uses' => 'SolicitudesController@obtener_proyecciones',
         'as' => 'proyecciones',
     ]);
+    Route::post('/EnviarMensaje', [
+        'uses' => 'SolicitudesController@enviar_mensaje',
+        'as' => 'enviar.mensaje',
+    ]);
     //solicitudes
     Route::post('/CrearSolicitud', [
         'uses' => 'SolicitudesController@crear_solicitud',
