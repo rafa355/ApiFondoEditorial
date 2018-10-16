@@ -13,7 +13,7 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                background-color: grey;
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
@@ -78,6 +78,7 @@
             @endif
 
             <div class="content">
+                <img src="{{ asset('images/logofe.png') }}"  border="0" class="hover" mc:edit="1_6">
                 <div class="title m-b-md">
                     Laravel
                 </div>
