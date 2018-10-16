@@ -73,8 +73,8 @@
 					<tbody>
 						<tr>
 							<td valign="middle" width="100%" height="40" style="text-align: center; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color: rgb(50, 50, 50); font-size: 15px; font-weight: 500; line-height: 22px;" class="fullCenter"mc:edit="8" >
-                                <h4>Atentamente el equipo de Fondo Editorial</h4><br>
-                                <a href="http://fondoeditorial.uneg.edu.ve"><h4>Pagina Principal</h4></a><br>
+                                <h4>Atentamente el equipo de Fondo Editorial</h4>
+                                <a href="http://fondoeditorial.uneg.edu.ve"><h4>Pagina Principal</h4></a>
                                 <h4>fondoeditorial@uneg.edu.ve</h4>
 							</td>
 						</tr>
