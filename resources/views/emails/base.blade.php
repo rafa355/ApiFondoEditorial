@@ -127,7 +127,7 @@ style="background-color: rgb(242, 244, 249);"
                             <td valign="middle" width="100%" style="text-align: center; font-family: 'Open Sans', Helvetica, Arial, sans-serif; font-size: 21px; 
                             /*color: rgb(255, 255, 255); */
                             line-height: 30px; font-weight: 600;" class="fullCenter"mc:edit="1" >
-                             Bitcoin Bogota.co
+                             Fondo Editorial Uneg
                             </td>
                           </tr>
                           <tr>
@@ -169,7 +169,7 @@ style="background-color: rgb(242, 244, 249);"
               </tr>
               <tr>
                 <td valign="middle" width="100%" style="text-align: center; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color: rgb(165, 168, 174); font-size: 12px; font-weight: 400; line-height: 18px;" class="fullCenter"mc:edit="10" >
-                  www.bitcoinbogota.co
+                    https://fondo-editorial.herokuapp.com/inicio
                 </td>
               </tr>
             </tbody></table>
