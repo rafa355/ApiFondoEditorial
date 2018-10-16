@@ -69,6 +69,6 @@ class SolicitudesController extends Controller
     }
     public function enviar_mensaje(Request $request ){
         Mail::to($request->correo)->send(new Notificaciones($request->mensaje));
-    	return response()->json("mensaje enviado");
+    	return response()->json('mensaje enviado');
     }
 }
