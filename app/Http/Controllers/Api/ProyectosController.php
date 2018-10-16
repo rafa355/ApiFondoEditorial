@@ -14,7 +14,7 @@ use App\Mail\Notificaciones;
 class ProyectosController extends Controller
 {
     public function obtener_tipos_proyectos(){
-    	return response()->json(ProyectoType::where('status',1)->orderby('nombre','asc')->get());
+    	return response()->json(ProyectoType::where('status','activo')->orderby('nombre','asc')->get());
     }
     public function obtener_proyectos(){
         
