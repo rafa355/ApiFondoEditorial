@@ -1,77 +1,114 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('email.base') @section('content')
+<table width="400" border="0" cellpadding="0" cellspacing="0" align="center" class="mobile" bgcolor="#ffffff" object="drag-module-small">
+    <tbody>
+        <tr>
+            <td width="100%" valign="middle" align="center">
 
-        <title>Laravel</title>
+                <table width="500" border="0" cellpadding="0" cellspacing="0" align="center" style="text-align: center; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="fullCenter">
+                    <tbody>
+                        <tr>
+                            <td width="100%" height="40"></td>
+                        </tr>
+                        <tr>
+                            <td valign="middle" width="100%" style="text-align: center; font-family: 'Open Sans', Helvetica, Arial, sans-serif; font-size: 36px; color: #f1bc16; line-height: 40px; font-weight: 100;" class="fullCenter" mc:edit="2">
+                                Nueva Notificación
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table width="500" border="0" cellpadding="0" cellspacing="0" align="center" style="text-align: center; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="fullCenter">
+    <!-- Image 42px - 3 -->
+    <tbody>
+        <tr>
+            <td width="100%" height="35" style="font-size: 1px; line-height: 1px;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td valign="top" width="100%" class="image42">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+                <table width="20" border="0" cellpadding="0" cellspacing="0" align="left" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="erase">
+                    <tbody>
+                        <tr>
+                            <td width="100%" height="10" style="font-size: 1px; line-height: 1px;" class="erase">&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            .full-height {
-                height: 100vh;
-            }
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" align="left" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="full">
+                    <tbody>
+                        <tr>
+                            <td valign="middle" width="100%" height="40" style="text-align: left; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color: rgb(50, 50, 50); font-size: 15px; font-weight: 300; line-height: 22px;" class="fullCenter" mc:edit="8">
+                                <h3 style="color:#393a34;font-size:20px">Apreciado/a usuario, ha recibido la siguiente notificación desde el sistema de Planificación editorial de Fondo Editorial UNEG. </h3>
+                                <p style="color: #7f8c8d;text-align: justify;font-size: 17px;">{{$notificacion}}</p>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100%" height="50" style="font-size: 1px; line-height: 1px;">&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+</table>
+<tr>
+    <td width="100%" height="35" style="font-size: 1px; line-height: 1px;">&nbsp;</td>
+</tr>
+<tr>
+    <td valign="top" width="100%" class="image42">
 
-            .position-ref {
-                position: relative;
-            }
+        <table width="20" border="0" cellpadding="0" cellspacing="0" align="left" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="erase">
+            <tbody>
+                <tr>
+                    <td width="100%" height="10" style="font-size: 1px; line-height: 1px;" class="erase">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" align="left" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="full">
+            <tbody>
+                <tr>
+                    <td valign="middle" width="100%" height="40" style="text-align: center; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color: rgb(50, 50, 50); font-size: 15px; font-weight: 500; line-height: 22px;" class="fullCenter" mc:edit="8">
+                        <h4>Atentamente el equipo de Fondo Editorial Uneg</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100%" height="5" style="font-size: 1px; line-height: 1px;">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td width="100%" height="35" style="font-size: 1px; line-height: 1px;">&nbsp;</td>
+</tr>
+<tr>
+    <td valign="top" width="100%" class="image42">
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+        <table width="20" border="0" cellpadding="0" cellspacing="0" align="left" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="erase">
+            <tbody>
+                <tr>
+                    <td width="100%" height="10" style="font-size: 1px; line-height: 1px;" class="erase">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td valign="top" width="100%" class="image42">
 
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="title m-b-md">
-                    {{$notificacion}}
-                </div>
-
-            </div>
-        </div>
-    </body>
-</html>
+        <table width="20" border="0" cellpadding="0" cellspacing="0" align="left" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="erase">
+            <tbody>
+                <tr>
+                    <td width="100%" height="10" style="font-size: 1px; line-height: 1px;" class="erase">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>
+</tbody>
+</table>
+@endsection
