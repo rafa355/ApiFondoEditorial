@@ -1,4 +1,4 @@
-@extends('email.base') @section('content')
+@extends('emails.base') @section('content')
 <table width="400" border="0" cellpadding="0" cellspacing="0" align="center" class="mobile" bgcolor="#ffffff" object="drag-module-small">
     <tbody>
         <tr>
