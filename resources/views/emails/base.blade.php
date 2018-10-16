@@ -106,7 +106,7 @@ style="background-color: rgb(242, 244, 249);"
                   <!-- SORTABLE -->
                   <div class="sortable_inner ui-sortable">
                   <!-- Start Top -->
-                  <table width="500" border="0" cellpadding="0" cellspacing="0" align="center" class="mobile" bgcolor="#1576c2" 
+                  <table width="500" border="0" cellpadding="0" cellspacing="0" align="center" class="mobile" bgcolor="#0a3677" 
                   style="background-image: url('images/not1_bg_image.jpg'); background-repeat:no-preat!important; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; background-position: center center; background-repeat: no-repeat; -webkit-border-top-right-radius: 6px; -moz-border-top-right-radius: 6px; border-top-right-radius: 6px; -webkit-border-top-left-radius: 6px; -moz-border-top-left-radius: 6px; border-top-left-radius: 6px;" id="not1ChangeBG" 
                   object="drag-module-small">
                     <tbody><tr>
@@ -120,8 +120,8 @@ style="background-color: rgb(242, 244, 249);"
                           
                           <tr>
                             <td width="100%"  >
-                            <!-- <img src="{{ asset('images/logofe.png') }}"  border="0" class="hover" mc:edit="1_6"> !-->
-                            <img src="https://fondo-editorial.herokuapp.com/assets/images/logofe.png"  border="0" class="hover" mc:edit="1_6">
+                            <!-- <img src="{{ asset('images/logofe.png') }}"  border="0" class="hover" mc:edit="1_6" style="height:60px"> !-->
+                            <img src="https://fondo-editorial.herokuapp.com/assets/images/logofe.png"  border="0" class="hover" mc:edit="1_6" style="height:60px">
                             </td>
                           </tr>
                           <tr>
