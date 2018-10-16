@@ -31,6 +31,9 @@ class SolicitudesController extends Controller
             $proyect = Proyecto::create([
                 'nombre' => $proyecto['nombre'],
                 'descripcion' => $proyecto['descripcion'],
+                'autor' => $proyecto['autor'],
+                'correo' => $proyecto['correo'],
+                'telefono' => $proyecto['telefono'],
                 'proyecto_type_id' => $proyecto['proyecto_type_id'],
                 'solicitud_id' => $id,
                 'tiempo_planificado_total' => $fecha[0],

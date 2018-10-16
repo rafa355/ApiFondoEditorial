@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Modelos\EtapaProyecto;
 use App\Modelos\Adjunto;
 use App\Modelos\Comentarios;
+use App\Modelos\Proyecto;
 
 class EtapasController extends Controller
 {
@@ -41,7 +42,7 @@ class EtapasController extends Controller
             'proyecto_id' => $request->proyecto,
             'tiempo_estimado' => $estimado[0],
         ]);
-
+        $proyecto = Proyecto::find($etapa_proyecto->proyecto_id)->update(['etapa' => 'Preliminar']);
     	return response()->json($etapa_proyecto);
     }
 
@@ -53,6 +54,7 @@ class EtapasController extends Controller
         $etapa_proyecto->save();
 
         if($request->etapa == 3){
+            $proyecto = Proyecto::find($request->proyecto)->update(['etapa' => 'Publicado']);
             return response()->json('FInalizado');
         }else{
         $ultimo_adjunto =  Adjunto::where('etapa_proyecto_id',$etapa_proyecto->id)->latest()->first();
@@ -63,7 +65,7 @@ class EtapasController extends Controller
             'proyecto_id' => $request->proyecto,
             'tiempo_estimado' => $estimado[0],
         ]);
-
+        $proyecto = Proyecto::find($etapa_proyecto_siguiente->proyecto_id)->update(['etapa' => 'Diagramacion']);
         $nuevo_adjunto = Adjunto::create([
             'ubicacion' => $ultimo_adjunto->ubicacion,
             'etapa_proyecto_id' => $etapa_proyecto_siguiente->id,
