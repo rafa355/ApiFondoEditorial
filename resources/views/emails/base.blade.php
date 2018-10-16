@@ -120,7 +120,8 @@ style="background-color: rgb(242, 244, 249);"
                           
                           <tr>
                             <td width="100%"  >
-                             <img src="{{ asset('images/logofe.png') }}"  border="0" class="hover" mc:edit="1_6">
+                            <!-- <img src="{{ asset('images/logofe.png') }}"  border="0" class="hover" mc:edit="1_6"> !-->
+                            <img src="https://fondo-editorial.herokuapp.com/assets/images/logofe.png"  border="0" class="hover" mc:edit="1_6">
                             </td>
                           </tr>
                           <tr>
