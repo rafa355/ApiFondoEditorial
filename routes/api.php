@@ -45,7 +45,10 @@ Route::namespace("Api")->group(function(){
         'uses' => 'ProyectosController@obtener_proyectos',
         'as' => 'eliminar.tipos',
     ]);
-
+    Route::get('ImprimirReporte',  [
+        'uses' => 'ProyectosController@reporte',
+        'as' => 'imprimir.reporte',
+    ]);
     Route::get('ObtenerProyecto/{id}',  [
         'uses' => 'ProyectosController@obtener_proyecto',
         'as' => 'proyecto',

@@ -50,4 +50,10 @@ class ProyectosController extends Controller
         $tipo->save();
     	return response()->json('Se Elimino');
     }
+
+    public function reporte(){
+        $reporte = Proyecto::Proyectos();
+        $pdf = \PDF::loadView('pdf.prueba',['reporte' => $reporte]);
+        return $pdf->download('archivo.pdf');
+    }
 }
