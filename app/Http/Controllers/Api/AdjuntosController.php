@@ -60,7 +60,10 @@ class AdjuntosController extends Controller
             }
         }
     }
-
+    public function descargar_adjunto($id){
+        $adjunto = Adjunto::find($id);
+        return response()->download($adjunto->ubicacion );
+    }
 
 
 }

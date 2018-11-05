@@ -128,11 +128,14 @@ Route::namespace("Api")->group(function(){
         'uses' => 'AdjuntosController@cargar_imagen',
         'as' => 'crear.imagen',
     ]);
+    Route::get('descargar/{id}',  [
+        'uses' => 'AdjuntosController@descargar_adjunto',
+        'as' => 'descargar',
+    ]);
     Route::get('ObtenerEtapa/{etapa}/{id}',  [
         'uses' => 'EtapasController@obtener_etapa',
         'as' => 'etapa',
     ]);
-
     Route::post('ActivarEtapa/',  [
         'uses' => 'EtapasController@activar_etapa',
         'as' => 'etapa',

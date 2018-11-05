@@ -35,6 +35,7 @@ class SolicitudesController extends Controller
                 'correo' => $proyecto['correo'],
                 'telefono' => $proyecto['telefono'],
                 'proyecto_type_id' => $proyecto['proyecto_type_id'],
+                'periodico' => $proyecto['periodico'],
                 'solicitud_id' => $id,
                 'tiempo_planificado_total' => $fecha[0],
             ]);
