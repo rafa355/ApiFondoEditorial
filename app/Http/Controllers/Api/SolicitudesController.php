@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Modelos\Solicitudes;
 use App\Modelos\Proyecto;
 use App\Modelos\Proyeccion;
+use App\Modelos\Observacion;
 
 use Mail;
 use App\Mail\Notificaciones;
@@ -58,16 +59,30 @@ class SolicitudesController extends Controller
     	return response()->json('Se activo la solicitud');
     }
 
-    public function eliminar_solicitud($id){
+    public function eliminar_solicitud(Request $request ,$id){
         $solicitud = Solicitudes::find($id);
         $solicitud->status = 'eliminada';
         $solicitud->save();
-    	return response()->json('Se activo la solicitud');
+        $observacion = Observacion::create([
+            'titulo' => 'Anulación de Solicitud',
+            'observacion' => $request->observacion,
+        ]);
+    	return response()->json('Se anulo la solicitud');
     }
     public function crear_solicitud(Request $request ){
         $solicitud = Solicitudes::create($request->all());
     	return response()->json($solicitud);
     }
+    public function editar_solicitud(Request $request, $id ){
+        $solicitud = Solicitudes::find($id)->update(['nombre' => $request->nombre,'publicacion' => $request->publicacion,'descripcion' => $request->descripcion,'solicitante_id' => $request->solicitante_id]);
+        $observacion = Observacion::create([
+            'titulo' => 'Edicion de Solicitud',
+            'observacion' => $request->observacion,
+        ]);
+
+        return response()->json($solicitud);
+    }
+
     public function obtener_proyecciones(){
     	return response()->json(Proyeccion::with('Solicitudes')->get());
     }

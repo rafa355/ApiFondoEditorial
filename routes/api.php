@@ -88,12 +88,21 @@ Route::namespace("Api")->group(function(){
         'uses' => 'SolicitudesController@enviar_mensaje',
         'as' => 'enviar.mensaje',
     ]);
+    //observaciones
+    Route::post('/CrearObservacion', [
+        'uses' => 'ObservacionesController@crear_observacion',
+        'as' => 'crear.observacion',
+    ]);
     //solicitudes
     Route::post('/CrearSolicitud', [
         'uses' => 'SolicitudesController@crear_solicitud',
         'as' => 'crear.solicitud',
     ]);
-    
+    Route::post('/EditarSolicitud/{id}', [
+        'uses' => 'SolicitudesController@editar_solicitud',
+        'as' => 'editar.solicitud',
+    ]);
+
     Route::get('ObtenerSolicitudes',  [
         'uses' => 'SolicitudesController@obtener_solicitudes',
         'as' => 'solicitudes',
@@ -109,7 +118,7 @@ Route::namespace("Api")->group(function(){
         'as' => 'activar.solicitud',
     ]);
 
-    Route::get('EliminarSolicitud/{id}',  [
+    Route::post('EliminarSolicitud/{id}',  [
         'uses' => 'SolicitudesController@eliminar_solicitud',
         'as' => 'activar.solicitud',
     ]);
