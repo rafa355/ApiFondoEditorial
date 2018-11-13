@@ -64,7 +64,7 @@ class SolicitudesController extends Controller
         $solicitud->status = 'eliminada';
         $solicitud->save();
         $observacion = Observacion::create([
-            'titulo' => 'Anulación de Solicitud',
+            'titulo' => 'Anulación de Solicitud '.$solicitud->nombre,
             'observacion' => $request->observacion,
         ]);
     	return response()->json('Se anulo la solicitud');
@@ -75,8 +75,9 @@ class SolicitudesController extends Controller
     }
     public function editar_solicitud(Request $request, $id ){
         $solicitud = Solicitudes::find($id)->update(['nombre' => $request->nombre,'publicacion' => $request->publicacion,'descripcion' => $request->descripcion,'solicitante_id' => $request->solicitante_id]);
+        $solicitud = Solicitudes::find($id);
         $observacion = Observacion::create([
-            'titulo' => 'Edicion de Solicitud',
+            'titulo' => 'Edicion de Solicitud '.$solicitud->nombre,
             'observacion' => $request->observacion,
         ]);
 

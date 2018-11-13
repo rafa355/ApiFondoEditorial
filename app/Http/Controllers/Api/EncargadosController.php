@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Modelos\Responsable;
 use App\Modelos\ResponsableType;
 use App\Modelos\ResponsableProyecto;
+use App\Modelos\Observacion;
 
 use Mail;
 use App\Mail\Notificaciones;
@@ -14,7 +15,7 @@ use App\Mail\Notificaciones;
 class EncargadosController extends Controller
 {
     public function obtener_encargados(){
-    	return response()->json(Responsable::with('tipo')->orderby('nombre','asc')->get());
+    	return response()->json(Responsable::with('tipo')->orderby('nombre','asc')->where('status','activo')->get());
     }
 
     public function obtener_principal($proyecto){
@@ -56,5 +57,16 @@ class EncargadosController extends Controller
         }
 
     	return response()->json($encargado_proyecto);
+    }
+
+    public function eliminar_encargado(Request $request ,$id){
+        $encargado = Responsable::find($id);
+        $encargado->status = 'eliminado';
+        $encargado->save();
+        $observacion = Observacion::create([
+            'titulo' => 'Eliminación de encargado '.$encargado->nombre,
+            'observacion' => $request->observacion,
+        ]);
+    	return response()->json('Se eliminó el encargado');
     }
 }

@@ -13,4 +13,7 @@ class ObservacionesController extends Controller
         //Mail::to('rafa350.rr@gmail.com')->send(new Notificaciones('Se registro nuevo solicitante.'));
     	return response()->json($Observaciones);
     }
+    public function obtener_observaciones(){
+    	return response()->json(Observacion::orderby('created_at','desc')->get());
+    }
 }

@@ -45,14 +45,21 @@ Route::namespace("Api")->group(function(){
         'uses' => 'ProyectosController@obtener_proyectos',
         'as' => 'eliminar.tipos',
     ]);
-    Route::get('ImprimirReporte',  [
-        'uses' => 'ProyectosController@reporte',
-        'as' => 'imprimir.reporte',
-    ]);
+
     Route::get('ObtenerProyecto/{id}',  [
         'uses' => 'ProyectosController@obtener_proyecto',
         'as' => 'proyecto',
     ]);
+
+    //reportes
+    Route::post('GenerarReporte/{tipo}',  [
+        'uses' => 'ReportesController@reporte',
+        'as' => 'imprimir.reporte',
+    ]);
+        Route::get('ImprimReporte/{tipo}',  [
+            'uses' => 'ReportesController@imprimir_reporte',
+            'as' => 'imprimirs.reporte',
+        ]);
     //encargados
     Route::post('/CrearEncargados', [
         'uses' => 'EncargadosController@crear_encargado',
@@ -74,7 +81,10 @@ Route::namespace("Api")->group(function(){
         'uses' => 'EncargadosController@obtener_encargado',
         'as' => 'encargado',
     ]);
-
+    Route::post('EliminarEncargado/{id}',  [
+        'uses' => 'EncargadosController@eliminar_encargado',
+        'as' => 'eliminar.encargado',
+    ]);
     Route::get('ObtenerEncargadostype',  [
         'uses' => 'EncargadosController@obtener_encargados_type',
         'as' => 'encargados_type',
@@ -92,6 +102,10 @@ Route::namespace("Api")->group(function(){
     Route::post('/CrearObservacion', [
         'uses' => 'ObservacionesController@crear_observacion',
         'as' => 'crear.observacion',
+    ]);
+    Route::get('ObtenerObservaciones',  [
+        'uses' => 'ObservacionesController@obtener_observaciones',
+        'as' => 'observaciones',
     ]);
     //solicitudes
     Route::post('/CrearSolicitud', [
