@@ -50,7 +50,10 @@ Route::namespace("Api")->group(function(){
         'uses' => 'ProyectosController@obtener_proyecto',
         'as' => 'proyecto',
     ]);
-
+    Route::get('ObtenerEstimado/{id}',  [
+        'uses' => 'ProyectosController@obtener_estimado',
+        'as' => 'proyecto.estimado',
+    ]);
     //reportes
     Route::post('GenerarReporte/{tipo}',  [
         'uses' => 'ReportesController@reporte',

@@ -51,5 +51,10 @@ class ProyectosController extends Controller
     	return response()->json('Se Elimino');
     }
 
-
+    public function obtener_estimado($id){
+        $proyecto = Proyecto::find($id);
+        $now = new \DateTime();
+        $fechaF = $proyecto->tiempo_planificado_total->diff($now);
+    	return response()->json($fechaF);
+    }
 }

@@ -13,10 +13,11 @@ class CreateObservacionessTable extends Migration
      */
     public function up()
     {
-        Schema::create('observaciones', function (Blueprint $table) {
+        Schema::create('observacioness', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titulo');
             $table->text('observacion');
+            $table->unsignedInteger('proyecto_id');
+            $table->foreign('proyecto_id')->references('id')->on('proyectos');
             $table->timestamps();
         });
     }

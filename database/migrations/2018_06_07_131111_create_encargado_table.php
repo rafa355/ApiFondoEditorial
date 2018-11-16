@@ -16,7 +16,6 @@ class CreateEncargadoTable extends Migration
         Schema::create('responsables', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->enum('status', ['activo','eliminado'])->default('activo');
             $table->unsignedInteger('responsable_type_id');
             $table->foreign('responsable_type_id')->references('id')->on('responsable_type');
             $table->timestamps();
