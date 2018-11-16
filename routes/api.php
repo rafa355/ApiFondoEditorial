@@ -50,6 +50,10 @@ Route::namespace("Api")->group(function(){
         'uses' => 'ProyectosController@obtener_proyecto',
         'as' => 'proyecto',
     ]);
+    Route::post('/EditarProyecto/{id}', [
+        'uses' => 'ProyectosController@editar_proyecto',
+        'as' => 'editar.proyecto',
+    ]);
     Route::get('ObtenerEstimado/{id}',  [
         'uses' => 'ProyectosController@obtener_estimado',
         'as' => 'proyecto.estimado',
@@ -180,6 +184,10 @@ Route::namespace("Api")->group(function(){
     //Contadores
     Route::get('ProduccionTotal/',  [
         'uses' => 'ContadorController@produccion',
+        'as' => 'etapa',
+    ]);
+    Route::get('Anuladas/',  [
+        'uses' => 'ContadorController@anuladas',
         'as' => 'etapa',
     ]);
     Route::get('EnPreliminar/',  [

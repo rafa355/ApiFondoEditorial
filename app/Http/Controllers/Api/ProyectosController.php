@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Modelos\Proyecto;
 use App\Modelos\ProyectoType;
 use App\Modelos\EtapaProyecto;
+use App\Modelos\Observacion;
 
 use Mail;
 use App\Mail\Notificaciones;
@@ -49,6 +50,19 @@ class ProyectosController extends Controller
         $tipo->status = 'eliminado';
         $tipo->save();
     	return response()->json('Se Elimino');
+    }
+
+    public function editar_proyecto(Request $request, $id ){
+        $fecha =explode("T",$request->tiempo_planificado_total);
+
+        $proyecto = Proyecto::find($id)->update(['nombre' => $request->nombre,'autor' => $request->autor,'correo' => $request->correo,'telefono' => $request->telefono,'periodico' => $request->periodico,'proyecto_type_id' => $request->proyecto_type_id,'descripcion' => $request->descripcion,'tiempo_planificado_total' => $fecha[0],'observacion' => $request->observacion]);
+        $proyecto = Proyecto::find($id);
+        $observacion = Observacion::create([
+            'titulo' => 'Edicion de Proyecto '.$proyecto->nombre,
+            'observacion' => $request->observacion,
+        ]);
+
+        return response()->json($proyecto);
     }
 
     public function obtener_estimado($id){
