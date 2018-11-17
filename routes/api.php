@@ -14,6 +14,11 @@ use Illuminate\Http\Request;
 */
 
 Route::namespace("Api")->group(function(){
+    //Inicio de sesion
+    Route::post('login', 'AutenticacionController@login');
+    Route::post('logout', 'AutenticacionController@logout');
+    Route::post('refresh', 'AutenticacionController@refresh');
+    Route::post('me', 'AutenticacionController@me');
     //solicitantes
     Route::get('ObtenerSolicitantes',  [
         'uses' => 'SolicitantesController@obtener_solicitantes',
