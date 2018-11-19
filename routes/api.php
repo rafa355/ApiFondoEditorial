@@ -16,9 +16,23 @@ use Illuminate\Http\Request;
 Route::namespace("Api")->group(function(){
     //Inicio de sesion
     Route::post('login', 'AutenticacionController@login');
-    Route::post('logout', 'AutenticacionController@logout');
-    Route::post('refresh', 'AutenticacionController@refresh');
-    Route::post('me', 'AutenticacionController@me');
+    //Usuarios
+    Route::get('ObtenerUsuarios',  [
+        'uses' => 'UsuariosController@obtener_usuarios',
+        'as' => 'usuarios',
+    ]);
+    Route::get('ObtenerUsuario/{id}',  [
+        'uses' => 'UsuariosController@obtener_usuario',
+        'as' => 'usuario',
+    ]);
+    Route::post('CrearUsuario',  [
+        'uses' => 'UsuariosController@crear_usuario',
+        'as' => 'crear.usuario',
+    ]);
+    Route::post('EliminarUsuario/{id}',  [
+        'uses' => 'UsuariosController@eliminar_usuario',
+        'as' => 'eliminar.usuario',
+    ]);
     //solicitantes
     Route::get('ObtenerSolicitantes',  [
         'uses' => 'SolicitantesController@obtener_solicitantes',
@@ -76,6 +90,10 @@ Route::namespace("Api")->group(function(){
     Route::post('/CrearEncargados', [
         'uses' => 'EncargadosController@crear_encargado',
         'as' => 'crear.encargado',
+    ]);
+    Route::post('/EditarEncargado/{id}', [
+        'uses' => 'EncargadosController@editar_encargado',
+        'as' => 'editar.encargado',
     ]);
     Route::get('/AsignarEncargado/{proyecto}/{encargado}', [
         'uses' => 'EncargadosController@asignar_encargado',

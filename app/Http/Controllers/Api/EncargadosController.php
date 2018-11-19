@@ -45,15 +45,18 @@ class EncargadosController extends Controller
 
     public function asignar_encargado($proyecto,$encargado ){
         $encargado_proyecto = ResponsableProyecto::where('proyecto_id',$proyecto)->where('tipo','principal')->first();
+        $responsable = Responsable::find($encargado);
         if(!($encargado_proyecto)){
             $encargado_proyecto = ResponsableProyecto::create([
                 'proyecto_id' => $proyecto,
                 'responsable_id' => $encargado,
                 'tipo' => 'principal',
             ]);
+            Mail::to($responsable->correo)->send(new Notificaciones('Ha sido asignado a un proyecto'));
         }else{
             $encargado_proyecto->responsable_id = $encargado;
             $encargado_proyecto->save();
+            Mail::to($responsable->correo)->send(new Notificaciones('Ha sido asignado a un proyecto'));
         }
 
     	return response()->json($encargado_proyecto);
@@ -68,5 +71,16 @@ class EncargadosController extends Controller
             'observacion' => $request->observacion,
         ]);
     	return response()->json('Se eliminó el encargado');
+    }
+
+    public function editar_encargado(Request $request, $id ){
+        $encargado = Responsable::find($id)->update(['nombre' => $request->nombre,'correo' => $request->correo,'responsable_type_id' => $request->responsable_type_id]);
+        $encargado = Responsable::find($id);
+        $observacion = Observacion::create([
+            'titulo' => 'Edicion de Encargado '.$encargado->nombre,
+            'observacion' => $request->observacion,
+        ]);
+
+        return response()->json($encargado);
     }
 }

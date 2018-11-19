@@ -10,7 +10,7 @@ class Responsable extends Model
     protected $table = 'responsables';
 
     protected $fillable = [
-        'nombre', 'responsable_type_id'
+        'nombre','correo', 'responsable_type_id'
     ];
 
     public function tipo()
