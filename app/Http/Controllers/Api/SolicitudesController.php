@@ -11,10 +11,24 @@ use App\Modelos\Observacion;
 
 use Mail;
 use App\Mail\Notificaciones;
+class datos_solicitudes {
+    public $todas;
+    public $activas;
+    public $pendientes;
+    public $anuladas;
+}
+class datos_proyecciones {
+    public $todas;
+}
 class SolicitudesController extends Controller
 {
     public function obtener_solicitudes(){
-    	return response()->json(Solicitudes::where('status','!=','eliminada')->with('solicitante')->with('Proyecto')->get());
+        $solicitudes = new datos_solicitudes();
+        $solicitudes->todas = Solicitudes::where('status','!=','eliminada')->with('solicitante')->with('Proyecto')->get();
+        $solicitudes->activas = Solicitudes::where('status','activa')->with('solicitante')->with('Proyecto')->get();
+        $solicitudes->pendientes = Solicitudes::where('status','pendiente')->with('solicitante')->with('Proyecto')->get();
+        $solicitudes->anuladas = Solicitudes::where('status','eliminada')->with('solicitante')->with('Proyecto')->get();
+    	return response()->json($solicitudes);
     }
 
     public function obtener_solicitud($id){
@@ -74,21 +88,22 @@ class SolicitudesController extends Controller
     	return response()->json($solicitud);
     }
     public function editar_solicitud(Request $request, $id ){
-        $solicitud = Solicitudes::find($id)->update(['nombre' => $request->nombre,'publicacion' => $request->publicacion,'descripcion' => $request->descripcion,'solicitante_id' => $request->solicitante_id]);
-        $solicitud = Solicitudes::find($id);
-        $observacion = Observacion::create([
-            'titulo' => 'Edicion de Solicitud '.$solicitud->nombre,
-            'observacion' => $request->observacion,
-        ]);
-
+        $solicitud = Solicitudes::find($id)->update($request->all());
         return response()->json($solicitud);
     }
 
     public function obtener_proyecciones(){
-    	return response()->json(Proyeccion::with('Solicitudes')->get());
+       $proyecciones = new datos_proyecciones();
+       $proyecciones->todas = Proyeccion::with('Solicitudes')->get();
+        return response()->json($proyecciones);
     }
     public function enviar_mensaje(Request $request ){
-        Mail::to($request->correo)->send(new Notificaciones($request->mensaje));
+        $correo = $request->correo;
+        $asunto = $request->asunto;
+        Mail::send('emails.notificaciones',['notificacion'=>$request->mensaje],function($msj) use($correo,$asunto){
+            $msj->subject($asunto);
+            $msj->to($correo);
+        });
     	return response()->json('mensaje enviado');
     }
 }

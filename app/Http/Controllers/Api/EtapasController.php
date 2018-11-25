@@ -55,7 +55,7 @@ class EtapasController extends Controller
 
         if($request->etapa == 3){
             $proyecto = Proyecto::find($request->proyecto)->update(['etapa' => 'Publicado']);
-            return response()->json('FInalizado');
+            return response()->json('Finalizado');
         }else{
         $ultimo_adjunto =  Adjunto::where('etapa_proyecto_id',$etapa_proyecto->id)->latest()->first();
         $ultimo_comentario =  Comentarios::where('adjunto_id',$ultimo_adjunto->id)->latest()->first();
@@ -65,14 +65,19 @@ class EtapasController extends Controller
             'proyecto_id' => $request->proyecto,
             'tiempo_estimado' => $estimado[0],
         ]);
-        $proyecto = Proyecto::find($etapa_proyecto_siguiente->proyecto_id)->update(['etapa' => 'Diagramacion']);
+        //si es etapa preliminar lo lleva a diagramación
+        if($request->etapa == 1){
+            $proyecto = Proyecto::find($etapa_proyecto_siguiente->proyecto_id)->update(['etapa' => 'Diagramacion']);
+        }
+        else{
+            $proyecto = Proyecto::find($etapa_proyecto_siguiente->proyecto_id)->update(['etapa' => 'Publicado']);
+        }
         $nuevo_adjunto = Adjunto::create([
             'ubicacion' => $ultimo_adjunto->ubicacion,
             'etapa_proyecto_id' => $etapa_proyecto_siguiente->id,
         ]);
 
         $nuevo_comentario = Comentarios::create([
-            //ojo aqui es contenido
             'contenido' => $ultimo_comentario->contenido,
             'adjunto_id' => $nuevo_adjunto->id,
         ]);

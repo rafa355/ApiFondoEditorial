@@ -129,8 +129,16 @@ Route::namespace("Api")->group(function(){
         'as' => 'enviar.mensaje',
     ]);
     //observaciones
-    Route::post('/CrearObservacion', [
-        'uses' => 'ObservacionesController@crear_observacion',
+    Route::post('/CrearObservacionSolicitud/{id}', [
+        'uses' => 'ObservacionesController@crear_observacion_solicitud',
+        'as' => 'crear.observacion',
+    ]);
+    Route::post('/CrearObservacionProyecto/{id}', [
+        'uses' => 'ObservacionesController@crear_observacion_proyecto',
+        'as' => 'crear.observacion',
+    ]);
+    Route::post('/CrearObservacionEncargado/{id}', [
+        'uses' => 'ObservacionesController@crear_observacion_encargado',
         'as' => 'crear.observacion',
     ]);
     Route::get('ObtenerObservaciones',  [

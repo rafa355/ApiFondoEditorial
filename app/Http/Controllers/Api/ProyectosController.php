@@ -54,14 +54,7 @@ class ProyectosController extends Controller
 
     public function editar_proyecto(Request $request, $id ){
         $fecha =explode("T",$request->tiempo_planificado_total);
-
-        $proyecto = Proyecto::find($id)->update(['nombre' => $request->nombre,'autor' => $request->autor,'correo' => $request->correo,'telefono' => $request->telefono,'periodico' => $request->periodico,'proyecto_type_id' => $request->proyecto_type_id,'descripcion' => $request->descripcion,'tiempo_planificado_total' => $fecha[0],'observacion' => $request->observacion]);
-        $proyecto = Proyecto::find($id);
-        $observacion = Observacion::create([
-            'titulo' => 'Edicion de Proyecto '.$proyecto->nombre,
-            'observacion' => $request->observacion,
-        ]);
-
+        $proyecto = Proyecto::find($id)->update(['nombre' => $request->nombre,'autor' => $request->autor,'correo' => $request->correo,'telefono' => $request->telefono,'periodico' => $request->periodico,'proyecto_type_id' => $request->proyecto_type_id,'descripcion' => $request->descripcion,'tiempo_planificado_total' => $fecha[0]]);
         return response()->json($proyecto);
     }
 
