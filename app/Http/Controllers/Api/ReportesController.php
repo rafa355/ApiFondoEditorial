@@ -30,8 +30,9 @@ class ReportesController extends Controller
         //transformando la fecha recibida en una fecha presentable
         $fecha_bajo =explode("-",$rango_bajo[0]);
         $fecha_alta =explode("-",$rango_alto[0]);
-        if($tipo == 'general' || $tipo == 'solicitudes'){
+        if($tipo == 'solicitudes_gen' || $tipo == 'solicitudes_est'|| $tipo == 'solicitudes_proyectos_gen'|| $tipo == 'solicitudes_proyectos_est'){
             //Datos de Solicitudes
+            $solicitudes->todas = Solicitudes::where('status','!=','eliminada')->whereBetween('created_at', array($rango_bajo[0], $rango_alto[0]))->with('solicitante')->with('Proyecto')->get();
             $solicitudes->activas = Solicitudes::where('status','activa')->whereBetween('created_at', array($rango_bajo[0], $rango_alto[0]))->with('solicitante')->with('Proyecto')->get();
             $solicitudes->pendientes = Solicitudes::where('status','pendiente')->whereBetween('created_at', array($rango_bajo[0], $rango_alto[0]))->with('solicitante')->with('Proyecto')->get();
             $solicitudes->anuladas = Solicitudes::where('status','eliminada')->whereBetween('created_at', array($rango_bajo[0], $rango_alto[0]))->with('solicitante')->with('Proyecto')->get();
@@ -40,12 +41,19 @@ class ReportesController extends Controller
             $parametros->periodo_bajo = $fecha_bajo[2].'/'.$fecha_bajo[1].'/'.$fecha_bajo[0];
             $parametros->periodo_alto = $fecha_alta[2].'/'.$fecha_alta[1].'/'.$fecha_alta[0];
 
-            if($tipo == 'general'){
-                $pdf = \PDF::loadView('pdf.solicitudes.por_estado',['solicitudes' => $solicitudes,'parametros' => $parametros])->setPaper('letter','landscape')->save($directorio_final);
-            }else{
-                $pdf = \PDF::loadView('pdf.solicitudes.por_estado_proyectos',['solicitudes' => $solicitudes,'parametros' => $parametros])->setPaper('letter','landscape')->save($directorio_final);
+            if($tipo == 'solicitudes_gen'){
+                $pdf = \PDF::loadView('pdf.solicitudes.solicitudes_gen',['solicitudes' => $solicitudes,'parametros' => $parametros])->setPaper('letter','landscape')->save($directorio_final);
             }
-            
+            if($tipo == 'solicitudes_est'){
+                $pdf = \PDF::loadView('pdf.solicitudes.solicitudes_est',['solicitudes' => $solicitudes,'parametros' => $parametros])->setPaper('letter','landscape')->save($directorio_final);
+            }
+            if($tipo == 'solicitudes_proyectos_gen'){
+                $pdf = \PDF::loadView('pdf.solicitudes.solicitudes_proyectos_gen',['solicitudes' => $solicitudes,'parametros' => $parametros])->setPaper('letter','landscape')->save($directorio_final);
+            }
+            if($tipo == 'solicitudes_proyectos_est'){
+                $pdf = \PDF::loadView('pdf.solicitudes.solicitudes_proyectos_est',['solicitudes' => $solicitudes,'parametros' => $parametros])->setPaper('letter','landscape')->save($directorio_final);
+            }
+
             $pdfs=$pdf->output();
         }
 
