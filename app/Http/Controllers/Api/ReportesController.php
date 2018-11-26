@@ -27,25 +27,28 @@ class ReportesController extends Controller
         $actual = new \DateTime();
         $rango_bajo =explode("T",$request->rango[0]);
         $rango_alto =explode("T",$request->rango[1]);
-
-        //Datos de Solicitudes
-        $solicitudes->activas = Solicitudes::where('status','activa')->whereBetween('created_at', array($rango_bajo[0], $rango_alto[0]))->with('solicitante')->with('Proyecto')->get();
-        $solicitudes->pendientes = Solicitudes::where('status','pendiente')->whereBetween('created_at', array($rango_bajo[0], $rango_alto[0]))->with('solicitante')->with('Proyecto')->get();
-        $solicitudes->anuladas = Solicitudes::where('status','eliminada')->whereBetween('created_at', array($rango_bajo[0], $rango_alto[0]))->with('solicitante')->with('Proyecto')->get();
-
         //transformando la fecha recibida en una fecha presentable
         $fecha_bajo =explode("-",$rango_bajo[0]);
-        $rango_bajo  = $fecha_bajo[2].'/'.$fecha_bajo[1].'/'.$fecha_bajo[0];
         $fecha_alta =explode("-",$rango_alto[0]);
-        $rango_alto  = $fecha_alta[2].'/'.$fecha_alta[1].'/'.$fecha_alta[0];
+        if($tipo == 'general' || $tipo == 'solicitudes'){
+            //Datos de Solicitudes
+            $solicitudes->activas = Solicitudes::where('status','activa')->whereBetween('created_at', array($rango_bajo[0], $rango_alto[0]))->with('solicitante')->with('Proyecto')->get();
+            $solicitudes->pendientes = Solicitudes::where('status','pendiente')->whereBetween('created_at', array($rango_bajo[0], $rango_alto[0]))->with('solicitante')->with('Proyecto')->get();
+            $solicitudes->anuladas = Solicitudes::where('status','eliminada')->whereBetween('created_at', array($rango_bajo[0], $rango_alto[0]))->with('solicitante')->with('Proyecto')->get();
+            //Datos Generales
+            $parametros->fecha_actual = $actual->format('d/m/Y H:i');
+            $parametros->periodo_bajo = $fecha_bajo[2].'/'.$fecha_bajo[1].'/'.$fecha_bajo[0];
+            $parametros->periodo_alto = $fecha_alta[2].'/'.$fecha_alta[1].'/'.$fecha_alta[0];
 
-        //Datos Generales
-        $parametros->fecha_actual = $actual->format('d/m/Y H:i');
-        $parametros->periodo_bajo = $rango_bajo;
-        $parametros->periodo_alto = $rango_alto;
+            if($tipo == 'general'){
+                $pdf = \PDF::loadView('pdf.solicitudes.por_estado',['solicitudes' => $solicitudes,'parametros' => $parametros])->setPaper('letter','landscape')->save($directorio_final);
+            }else{
+                $pdf = \PDF::loadView('pdf.solicitudes.por_estado_proyectos',['solicitudes' => $solicitudes,'parametros' => $parametros])->setPaper('letter','landscape')->save($directorio_final);
+            }
+            
+            $pdfs=$pdf->output();
+        }
 
-        $pdf = \PDF::loadView('pdf.solicitudes.por_estado',['solicitudes' => $solicitudes,'parametros' => $parametros])->setPaper('letter','landscape')->save($directorio_final);
-        $pdfs=$pdf->output();
         if(file_put_contents($directorio_final, $pdfs) ){
             return response()->json($nombre);
         }else{
