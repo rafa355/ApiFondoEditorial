@@ -9,7 +9,7 @@ class Observacion extends Model
     protected $table = 'observacioness';
 
     protected $fillable = [
-        'observacion','titulo'
+        'observacion','titulo','actualizacion'
     ];
 
 }

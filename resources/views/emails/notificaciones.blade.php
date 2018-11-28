@@ -43,8 +43,8 @@
           <tbody>
             <tr>
               <td valign="middle" width="100%" height="40" style="text-align: left; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color: rgb(50, 50, 50); font-size: 15px; font-weight: 300; line-height: 22px;" class="fullCenter"mc:edit="8" >
-                <h3 style="color:#393a34;font-size:17px;text-align:center">Apreciado/a usuario, ha recibido la siguiente notiicación desde el sistema de planificacion editorial UNEG. </h3>
-                <p style="color: #7f8c8d;text-align: justify;font-size: 15px;">{{$notificacion}}</p>
+                <h3 style="color:#393a34;font-size:17px;text-align:center">Apreciado/a usuario, ha recibido la siguiente notificación desde el sistema de planificacion y control editorial UNEG. </h3>
+                <p style="color: #7f8c8d;text-align: justify;font-size: 15px;">{!!$notificacion!!}</p>
 
               </td>
             </tr>

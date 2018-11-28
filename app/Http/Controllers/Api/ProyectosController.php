@@ -8,6 +8,7 @@ use App\Modelos\Proyecto;
 use App\Modelos\ProyectoType;
 use App\Modelos\EtapaProyecto;
 use App\Modelos\Observacion;
+use App\Modelos\Adjunto;
 
 use Mail;
 use App\Mail\Notificaciones;
@@ -36,7 +37,7 @@ class ProyectosController extends Controller
     }
 
     public function obtener_proyecto($id){
-    	return response()->json(Proyecto::with('proyectotype')->find($id));
+    	return response()->json(Proyecto::with('proyectotype')->with('solicitudes')->find($id));
     }
 
     public function crear_tipo_proyecto(Request $request ){
@@ -63,5 +64,36 @@ class ProyectosController extends Controller
         $now = new \DateTime();
         $fechaF = $proyecto->tiempo_planificado_total->diff($now);
     	return response()->json($fechaF);
+    }
+
+    public function publicar_proyecto(Request $request, $proyecto, $etapa){
+        $proyecto = Proyecto::with('solicitudes')->find($proyecto);
+        $etapa_proyecto =  EtapaProyecto::where('etapa_type_id',$etapa)->where('proyecto_id',$proyecto->id)->first();
+        $ultimo_adjunto =  Adjunto::where('etapa_proyecto_id',$etapa_proyecto->id)->latest()->first();
+        
+        $correo = $request->correo;
+        $asunto = $request->asunto;
+        if($proyecto->solicitudes->publicacion == 'no'){
+            $mensaje = $request->mensaje. PHP_EOL .' Para la descarga del archivo se adjunta el siguiente link: '.$request->link.$ultimo_adjunto->id;
+            Mail::send('emails.notificaciones',['notificacion'=> $mensaje],function($msj) use($correo,$asunto){
+                $msj->subject($asunto);
+                $msj->to($correo);
+            });
+        }else{
+            $proyecto->deposito = $request->deposito;
+            $proyecto->isbn = $request->isbn;
+            $proyecto->link = $request->adjunto;
+            $proyecto->save();
+            $mensaje = $request->mensaje. PHP_EOL .'Para acceder a esta publicacion en el sistema ingrese al siguiente link: '.$request->adjunto.' Para la descarga del archivo se adjunta el siguiente link: '.$request->link.$ultimo_adjunto->id;
+            Mail::send('emails.notificaciones',['notificacion'=> $mensaje],function($msj) use($correo,$asunto){
+                $msj->subject($asunto);
+                $msj->to($correo);
+            });
+        }
+        $observacion = Observacion::create([
+            'titulo' => 'Publicacion de Proyecto '.$proyecto->nombre,
+            'observacion' => $mensaje,
+        ]);
+    	return response()->json($ultimo_adjunto);
     }
 }

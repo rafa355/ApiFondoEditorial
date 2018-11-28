@@ -78,6 +78,7 @@ class SolicitudesController extends Controller
         $solicitud->status = 'eliminada';
         $solicitud->save();
         $observacion = Observacion::create([
+            'actualizacion' => $request->actualizacion,
             'titulo' => 'Anulación de Solicitud '.$solicitud->nombre,
             'observacion' => $request->observacion,
         ]);

@@ -77,6 +77,10 @@ Route::namespace("Api")->group(function(){
         'uses' => 'ProyectosController@obtener_estimado',
         'as' => 'proyecto.estimado',
     ]);
+    Route::post('/PublicarProyecto/{proyecto}/{etapa}', [
+        'uses' => 'ProyectosController@publicar_proyecto',
+        'as' => 'publicar.proyecto',
+    ]);
     //reportes
     Route::post('GenerarReporte/{tipo}',  [
         'uses' => 'ReportesController@reporte',
@@ -183,6 +187,10 @@ Route::namespace("Api")->group(function(){
     Route::post('CrearAdjunto/{id}',  [
         'uses' => 'AdjuntosController@crear_adjunto',
         'as' => 'crear.adjunto',
+    ]);
+    Route::post('RevisarAdjunto/{proyecto}/{etapa}',  [
+        'uses' => 'AdjuntosController@revisar_adjunto',
+        'as' => 'revisar.adjunto',
     ]);
 
     Route::post('CargarImagen/{etapa}/{id}',  [

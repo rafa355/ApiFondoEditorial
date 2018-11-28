@@ -38,7 +38,7 @@ class EncargadosController extends Controller
 
         $encargado = Responsable::create($request->all());
 
-        Mail::to('rafa350.rr@gmail.com')->send(new Notificaciones('Se registro nuevo responsable.'));
+        //Mail::to('rafa350.rr@gmail.com')->send(new Notificaciones('Se registro nuevo responsable.'));
 
     	return response()->json($encargado);
     }
@@ -52,11 +52,11 @@ class EncargadosController extends Controller
                 'responsable_id' => $encargado,
                 'tipo' => 'principal',
             ]);
-            Mail::to($responsable->correo)->send(new Notificaciones('Ha sido asignado a un proyecto'));
+            //Mail::to($responsable->correo)->send(new Notificaciones('Ha sido asignado a un proyecto'));
         }else{
             $encargado_proyecto->responsable_id = $encargado;
             $encargado_proyecto->save();
-            Mail::to($responsable->correo)->send(new Notificaciones('Ha sido asignado a un proyecto'));
+            //Mail::to($responsable->correo)->send(new Notificaciones('Ha sido asignado a un proyecto'));
         }
 
     	return response()->json($encargado_proyecto);
@@ -67,6 +67,7 @@ class EncargadosController extends Controller
         $encargado->status = 'eliminado';
         $encargado->save();
         $observacion = Observacion::create([
+            'actualizacion' => $request->actualizacion,
             'titulo' => 'Eliminación de encargado '.$encargado->nombre,
             'observacion' => $request->observacion,
         ]);
@@ -77,6 +78,7 @@ class EncargadosController extends Controller
         $encargado = Responsable::find($id)->update(['nombre' => $request->nombre,'correo' => $request->correo,'responsable_type_id' => $request->responsable_type_id]);
         $encargado = Responsable::find($id);
         $observacion = Observacion::create([
+            'actualizacion' => $request->actualizacion,
             'titulo' => 'Edicion de Encargado '.$encargado->nombre,
             'observacion' => $request->observacion,
         ]);

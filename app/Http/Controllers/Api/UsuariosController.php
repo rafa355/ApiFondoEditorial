@@ -36,6 +36,7 @@ class UsuariosController extends Controller
         $usuario->delete();
 
         $observacion = Observacion::create([
+            'actualizacion' => $request->actualizacion,
             'titulo' => 'Eliminación de usuario '.$usuario_borrado->name,
             'observacion' => $request->observacion,
         ]);

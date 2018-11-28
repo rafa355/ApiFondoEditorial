@@ -65,5 +65,26 @@ class AdjuntosController extends Controller
         return response()->download($adjunto->ubicacion );
     }
 
+    public function revisar_adjunto(Request $request,$proyecto,$etapa){
+
+        $etapa_proyecto =  EtapaProyecto::where('etapa_type_id',$etapa)->where('proyecto_id',$proyecto)->first();
+        $etapa_proyecto->status = 1;
+        $etapa_proyecto->save();
+        $ultimo_adjunto =  Adjunto::where('etapa_proyecto_id',$etapa_proyecto->id)->latest()->first();
+
+        //se guarda el nuevo adjunto con los datos del ultimo
+        $nuevo_adjunto = Adjunto::create([
+            'ubicacion' => $ultimo_adjunto->ubicacion,
+            'etapa_proyecto_id' => $etapa_proyecto->id,
+            'status' => 3,
+        ]);
+
+        $nuevo_comentario = Comentarios::create([
+            'contenido' => $request->comentario,
+            'adjunto_id' => $nuevo_adjunto->id,
+        ]);
+
+        return response()->json('revisado');
+    }
 
 }
