@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Modelos\Adjunto;
 use App\Modelos\EtapaProyecto;
 use App\Modelos\Comentarios;
+use App\Modelos\Proyecto;
 
 class AdjuntosController extends Controller
 {
@@ -55,6 +56,21 @@ class AdjuntosController extends Controller
             }
 
             return response()->json($adjunto->id);
+            }else{
+                return response()->json("que va");
+            }
+        }
+    }
+    public function asignar_imagen(Request $request,$id){
+        $proyecto = Proyecto::find($id);
+        $imagen_nombre = $_FILES['imagenPropia']['name']; 
+        $directorio_final = public_path('imagenes/').$imagen_nombre;  
+
+        if(isset($_FILES['imagenPropia'])){
+          if(move_uploaded_file($_FILES['imagenPropia']['tmp_name'],$directorio_final )){
+            $proyecto->imagen = 'imagenes/'.$imagen_nombre;
+            $proyecto->save();
+            return response()->json('se movio');
             }else{
                 return response()->json("que va");
             }

@@ -3,6 +3,7 @@
 /public/storage
 /public/pdfs
 /public/archivos
+/public/imagenes
 /storage/*.key
 /vendor
 /.idea

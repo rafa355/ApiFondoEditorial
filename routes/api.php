@@ -197,6 +197,10 @@ Route::namespace("Api")->group(function(){
         'uses' => 'AdjuntosController@cargar_imagen',
         'as' => 'crear.imagen',
     ]);
+    Route::post('AsignarImagen/{id}',  [
+        'uses' => 'AdjuntosController@asignar_imagen',
+        'as' => 'asignar.imagen',
+    ]);
     Route::get('descargar/{id}',  [
         'uses' => 'AdjuntosController@descargar_adjunto',
         'as' => 'descargar',

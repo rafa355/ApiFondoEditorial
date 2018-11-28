@@ -18,7 +18,7 @@ class Proyecto extends Model
     protected $table = 'proyectos';
 
     protected $fillable = [
-        'nombre','descripcion','proyecto_type_id','solicitud_id','tiempo_planificado_total','tiempo_transcurrido_total','autor','telefono','correo','etapa','periodico','deposito','isbn','link',
+        'nombre','descripcion','proyecto_type_id','solicitud_id','tiempo_planificado_total','tiempo_transcurrido_total','autor','telefono','correo','etapa','periodico','deposito','isbn','link','imagen','finalizado'
     ];
 
     public static function Proyectos(){
