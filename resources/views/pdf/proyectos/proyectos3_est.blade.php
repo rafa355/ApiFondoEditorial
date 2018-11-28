@@ -21,23 +21,22 @@
     <table>
         <tr class="cabecera">
             <th>Nombre de Proyecto</th>
+            <th>Autor</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
             <th>Usuario/Cliente</th>
-            <th>Tipo de proyecto</th>
-            <th>Diseñador</th>
-            <th>Fecha de Inicio</th>
-            <th>Fecha de Entrega Estimada</th>
-            <th>Fecha de Entrega Real</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
         </tr>
         @foreach($proyectos->ninguna as $ninguna)
         <tr>
             <td>{{$ninguna->nombre}}</td>
+            <td>{{$ninguna->autor}}</td>
+            <td>{{$ninguna->correo}}</td>
+            <td>{{$ninguna->telefono}}</td>
             <td>{{$ninguna->cliente}}</td>
-            <td>{{$ninguna->tipo}}</td>
-            <td>@if(empty($ninguna->responsable)) Sin Asignar @else {{$ninguna->responsable}} @endif</td>
-            @php $fecha =explode(" ",$ninguna->created_at); @endphp
-            <td>{{$fecha[0]}}</td>
-            <td>{{$ninguna->fecha_estimada}}</td>
-            <td>{{$ninguna->tiempo_real}}</td>
+            <td>{{$ninguna->correo_cliente}}</td>
+            <td>{{$ninguna->telefono_cliente}}</td>
         </tr>
         @endforeach
     </table>
@@ -51,23 +50,22 @@
     <table>
         <tr class="cabecera">
             <th>Nombre de Proyecto</th>
+            <th>Autor</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
             <th>Usuario/Cliente</th>
-            <th>Tipo de proyecto</th>
-            <th>Diseñador</th>
-            <th>Fecha de Inicio</th>
-            <th>Fecha de Entrega Estimada</th>
-            <th>Fecha de Entrega Real</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
         </tr>
         @foreach($proyectos->preliminar as $preliminar)
         <tr>
             <td>{{$preliminar->nombre}}</td>
+            <td>{{$preliminar->autor}}</td>
+            <td>{{$preliminar->correo}}</td>
+            <td>{{$preliminar->telefono}}</td>
             <td>{{$preliminar->cliente}}</td>
-            <td>{{$preliminar->tipo}}</td>
-            <td>@if(empty($preliminar->responsable)) Sin Asignar @else {{$preliminar->responsable}} @endif</td>
-            @php $fecha =explode(" ",$preliminar->created_at); @endphp
-            <td>{{$fecha[0]}}</td>
-            <td>{{$preliminar->fecha_estimada}}</td>
-            <td>{{$preliminar->tiempo_real}}</td>
+            <td>{{$preliminar->correo_cliente}}</td>
+            <td>{{$preliminar->telefono_cliente}}</td>
         </tr>
         @endforeach
     </table>
@@ -81,23 +79,22 @@
     <table>
         <tr class="cabecera">
             <th>Nombre de Proyecto</th>
+            <th>Autor</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
             <th>Usuario/Cliente</th>
-            <th>Tipo de proyecto</th>
-            <th>Diseñador</th>
-            <th>Fecha de Inicio</th>
-            <th>Fecha de Entrega Estimada</th>
-            <th>Fecha de Entrega Real</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
         </tr>
         @foreach($proyectos->diagramacion as $diagramacion)
         <tr>
             <td>{{$diagramacion->nombre}}</td>
+            <td>{{$diagramacion->autor}}</td>
+            <td>{{$diagramacion->correo}}</td>
+            <td>{{$diagramacion->telefono}}</td>
             <td>{{$diagramacion->cliente}}</td>
-            <td>{{$diagramacion->tipo}}</td>
-            <td>@if(empty($diagramacion->responsable)) Sin Asignar @else {{$diagramacion->responsable}} @endif</td>
-            @php $fecha =explode(" ",$diagramacion->created_at); @endphp
-            <td>{{$fecha[0]}}</td>
-            <td>{{$diagramacion->fecha_estimada}}</td>
-            <td>{{$diagramacion->tiempo_real}}</td>
+            <td>{{$diagramacion->correo_cliente}}</td>
+            <td>{{$diagramacion->telefono_cliente}}</td>
         </tr>
         @endforeach
     </table>
@@ -111,23 +108,22 @@
     <table>
         <tr class="cabecera">
             <th>Nombre de Proyecto</th>
+            <th>Autor</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
             <th>Usuario/Cliente</th>
-            <th>Tipo de proyecto</th>
-            <th>Diseñador</th>
-            <th>Fecha de Inicio</th>
-            <th>Fecha de Entrega Estimada</th>
-            <th>Fecha de Entrega Real</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
         </tr>
         @foreach($proyectos->publicacion as $publicacion)
         <tr>
             <td>{{$publicacion->nombre}}</td>
+            <td>{{$publicacion->autor}}</td>
+            <td>{{$publicacion->correo}}</td>
+            <td>{{$publicacion->telefono}}</td>
             <td>{{$publicacion->cliente}}</td>
-            <td>{{$publicacion->tipo}}</td>
-            <td>@if(empty($publicacion->responsable)) Sin Asignar @else {{$publicacion->responsable}} @endif</td>
-            @php $fecha =explode(" ",$publicacion->created_at); @endphp
-            <td>{{$fecha[0]}}</td>
-            <td>{{$publicacion->fecha_estimada}}</td>
-            <td>{{$publicacion->tiempo_real}}</td>
+            <td>{{$publicacion->correo_cliente}}</td>
+            <td>{{$publicacion->telefono_cliente}}</td>
         </tr>
         @endforeach
     </table>

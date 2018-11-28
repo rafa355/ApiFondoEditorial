@@ -11,6 +11,7 @@ class datos_proyectos {
     public $preliminar;
     public $diagramacion;
     public $publicacion;
+    public $listos;
 }
 class Proyecto extends Model
 {
@@ -114,6 +115,18 @@ class Proyecto extends Model
             ->whereBetween('proyectos.created_at', array($rango_bajo, $rango_alto))
             ->get();
         $proyectos->publicacion = DB::table('solicitudes')
+            ->select('solicitudes.telefono as telefono_cliente','solicitudes.correo as correo_cliente','proyectos.telefono as telefono','proyectos.correo as correo','proyectos.deposito','proyectos.isbn','proyectos.link','proyectos.id','solicitantes.nombre as cliente','responsables.nombre as responsable','proyectos.nombre as nombre','proyectos.created_at','proyecto_type.nombre as tipo','proyectos.tiempo_planificado_total as fecha_estimada','proyectos.tiempo_transcurrido_total as tiempo_transcurrido','proyectos.tiempo_real_total as tiempo_real','proyectos.autor as autor','proyectos.telefono as telefono','proyectos.correo as correo','proyectos.etapa as etapa')
+            ->leftJoin('proyectos', 'solicitudes.id', '=', 'proyectos.solicitud_id')
+            ->leftJoin('proyecto_type', 'proyectos.proyecto_type_id', '=', 'proyecto_type.id')
+            ->leftJoin('responsable_proyecto', 'proyectos.id', '=', 'responsable_proyecto.proyecto_id')
+            ->leftJoin('responsables', 'responsable_proyecto.responsable_id', '=', 'responsables.id')
+            ->leftJoin('solicitantes', 'solicitudes.solicitante_id', '=', 'solicitantes.id')
+            ->where('solicitudes.status','=','activa')
+            ->where('proyectos.etapa','=','Publicado')
+            ->whereBetween('proyectos.created_at', array($rango_bajo, $rango_alto))
+            ->get();
+
+        $proyectos->listos = DB::table('solicitudes')
             ->select('solicitudes.telefono as telefono_cliente','solicitudes.correo as correo_cliente','proyectos.telefono as telefono','proyectos.correo as correo','proyectos.deposito','proyectos.isbn','proyectos.link','proyectos.id','solicitantes.nombre as cliente','responsables.nombre as responsable','proyectos.nombre as nombre','proyectos.created_at','proyecto_type.nombre as tipo','proyectos.tiempo_planificado_total as fecha_estimada','proyectos.tiempo_transcurrido_total as tiempo_transcurrido','proyectos.tiempo_real_total as tiempo_real','proyectos.autor as autor','proyectos.telefono as telefono','proyectos.correo as correo','proyectos.etapa as etapa')
             ->leftJoin('proyectos', 'solicitudes.id', '=', 'proyectos.solicitud_id')
             ->leftJoin('proyecto_type', 'proyectos.proyecto_type_id', '=', 'proyecto_type.id')

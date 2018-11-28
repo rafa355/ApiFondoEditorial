@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modelos\Proyecto;
 use App\Modelos\Solicitudes;
+use App\Modelos\Observacion;
+
 class datos_generales{
     public $fecha_actual;
     public $periodo_bajo;
@@ -61,7 +63,7 @@ class ReportesController extends Controller
             $pdfs=$pdf->output();
         }
         //si es reporte de proyecto
-        if($tipo == 'proyectos_gen' || $tipo == 'proyectos_est'|| $tipo == 'proyectos2_gen'|| $tipo == 'proyectos2_est'|| $tipo == 'proyectos3_gen'|| $tipo == 'proyectos3_est'){
+        if($tipo == 'proyectos_gen' || $tipo == 'proyectos_est'|| $tipo == 'proyectos2_gen'|| $tipo == 'proyectos2_est'|| $tipo == 'proyectos3_gen'|| $tipo == 'proyectos3_est'|| $tipo == 'proyectos_listos'){
             //Datos de Proyectos
             $proyectos = Proyecto::Proyectos_por_fecha($rango_bajo[0], $rango_alto[0]);
 
@@ -83,9 +85,22 @@ class ReportesController extends Controller
             if($tipo == 'proyectos3_est'){
                 $pdf = \PDF::loadView('pdf.proyectos.proyectos3_est',['proyectos' => $proyectos,'parametros' => $parametros])->setPaper('letter','landscape')->save($directorio_final);
             }
+            if($tipo == 'proyectos_listos'){
+                $pdf = \PDF::loadView('pdf.proyectos.proyectos_listos',['proyectos' => $proyectos,'parametros' => $parametros])->setPaper('letter','landscape')->save($directorio_final);
+            }
             $pdfs=$pdf->output();
         }
 
+        if($tipo == 'actividades' || $tipo == 'mejoras'){
+            $observaciones = Observacion::orderby('created_at','desc')->get();
+            if($tipo == 'actividades'){
+                $pdf = \PDF::loadView('pdf.otros.actividades',['observaciones' => $observaciones,'parametros' => $parametros])->setPaper('letter','landscape')->save($directorio_final);
+            }
+            if($tipo == 'mejoras'){
+                $pdf = \PDF::loadView('pdf.otros.mejoras',['observaciones' => $observaciones,'parametros' => $parametros])->setPaper('letter','landscape')->save($directorio_final);
+            }
+            $pdfs=$pdf->output();
+        }
         if(file_put_contents($directorio_final, $pdfs) ){
             return response()->json($nombre);
         }else{
