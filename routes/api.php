@@ -221,25 +221,24 @@ Route::namespace("Api")->group(function(){
     ]);
 
     //Contadores
-    Route::get('ProduccionTotal/',  [
-        'uses' => 'ContadorController@produccion',
+    Route::post('SolicitudesEstado/',  [
+        'uses' => 'ContadorController@solicitudes_estado',
         'as' => 'etapa',
     ]);
-    Route::get('Anuladas/',  [
-        'uses' => 'ContadorController@anuladas',
+    Route::post('SolicitudesTipo/',  [
+        'uses' => 'ContadorController@solicitudes_tipo',
         'as' => 'etapa',
     ]);
-    Route::get('EnPreliminar/',  [
-        'uses' => 'ContadorController@preliminar',
+    Route::post('SolicitudesUsuarioCliente/',  [
+        'uses' => 'ContadorController@solicitudes_proyectos_usuario_cliente',
         'as' => 'etapa',
     ]);
-    Route::get('EnDiagramacion/',  [
-        'uses' => 'ContadorController@diagramacion',
+    Route::post('ProyectosUsuarioCliente/',  [
+        'uses' => 'ContadorController@proyectos_usuario_cliente',
         'as' => 'etapa',
     ]);
-    Route::get('EnPublicacion/',  [
-        'uses' => 'ContadorController@publicacion',
+    Route::post('ProyectosGenerales/',  [
+        'uses' => 'ContadorController@proyectos_generales',
         'as' => 'etapa',
     ]);
-
 });

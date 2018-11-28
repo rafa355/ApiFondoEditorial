@@ -15,5 +15,10 @@ class Solicitante extends Model
     public function solicitudes()
 	{
 	 	return $this->hasmany('App\Modelos\Solicitudes');
-	}
+    }
+    public function conrador()
+	{
+
+	 	return 1;
+    }
 }
