@@ -37,9 +37,14 @@ class datos_proyectos {
 }
 class ContadorController extends Controller
 {
-    public function produccion(){
-        $proyectos = Proyecto::Proyectos();
-    	return response()->json(count($proyectos->todas));
+    public function contadores_generales(){
+        $proyectos = new datos_proyectos();
+        $contador = Proyecto::Proyectos();
+        $proyectos->todas = count($contador->todas);
+        $proyectos->preliminar = count($contador->preliminar);
+        $proyectos->diagramacion = count($contador->diagramacion);
+        $proyectos->publicacion = count($contador->publicacion);
+    	return response()->json($proyectos);
     }
 
     public function solicitudes_proyectos_usuario_cliente(Request $request){

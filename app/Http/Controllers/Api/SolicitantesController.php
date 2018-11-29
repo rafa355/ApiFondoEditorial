@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modelos\Solicitante;
+use App\Modelos\Observacion;
 
 use Mail;
 use App\Mail\Notificaciones;
@@ -16,7 +17,12 @@ class SolicitantesController extends Controller
 
     public function crear_solicitante(Request $request ){
         $solicitante = Solicitante::create($request->all());
-        Mail::to('rafa350.rr@gmail.com')->send(new Notificaciones('Se registro nuevo solicitante.'));
+        $observacion = Observacion::create([
+            'actualizacion' => 'NO',
+            'titulo' => 'Creación de Usuario/Cliente',
+            'observacion' => 'Se creó el Usuario/Cliente '.$solicitante->nombre,
+        ]);
+        //Mail::to('rafa350.rr@gmail.com')->send(new Notificaciones('Se registro nuevo solicitante.'));
     	return response()->json($solicitante);
     }
 

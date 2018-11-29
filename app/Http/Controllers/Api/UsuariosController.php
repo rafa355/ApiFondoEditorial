@@ -26,6 +26,11 @@ class UsuariosController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             ]);
+            $observacion = Observacion::create([
+                'actualizacion' => 'NO',
+                'titulo' => 'Creación de Usuario Autorizado',
+                'observacion' => 'Se creó el Usuario Autorizado '.$usuario->name,
+            ]);
        // Mail::to('rafa350.rr@gmail.com')->send(new Notificaciones('Se registro nuevo usuario autorizado.'));
     	return response()->json($usuario);
     }

@@ -18,7 +18,7 @@ class Proyecto extends Model
     protected $table = 'proyectos';
 
     protected $fillable = [
-        'nombre','descripcion','proyecto_type_id','solicitud_id','tiempo_planificado_total','tiempo_transcurrido_total','autor','telefono','correo','etapa','periodico','deposito','isbn','link','imagen','finalizado'
+        'nombre','descripcion','proyecto_type_id','solicitud_id','tiempo_planificado_total','tiempo_real_total','tiempo_transcurrido_total','autor','telefono','correo','etapa','periodico','deposito','isbn','link','imagen','finalizado'
     ];
 
     public static function Proyectos(){
@@ -39,6 +39,7 @@ class Proyecto extends Model
             ->leftJoin('responsable_proyecto', 'proyectos.id', '=', 'responsable_proyecto.proyecto_id')
             ->leftJoin('responsables', 'responsable_proyecto.responsable_id', '=', 'responsables.id')
             ->where('solicitudes.status','=','activa')
+            ->where('proyectos.finalizado','=','NO')
             ->get();
         $proyectos->preliminar = DB::table('solicitudes')
             ->select('proyectos.id','responsables.nombre as responsable','proyectos.nombre as nombre','proyectos.created_at','proyecto_type.nombre as tipo','proyectos.tiempo_planificado_total as fecha_estimada','proyectos.tiempo_transcurrido_total as tiempo_transcurrido','proyectos.tiempo_real_total as tiempo_real','proyectos.autor as autor','proyectos.telefono as telefono','proyectos.correo as correo','proyectos.etapa as etapa')
@@ -59,13 +60,24 @@ class Proyecto extends Model
             ->where('proyectos.etapa','=','Diagramacion')
             ->get();
         $proyectos->publicacion = DB::table('solicitudes')
-            ->select('proyectos.id','responsables.nombre as responsable','proyectos.nombre as nombre','proyectos.created_at','proyecto_type.nombre as tipo','proyectos.tiempo_planificado_total as fecha_estimada','proyectos.tiempo_transcurrido_total as tiempo_transcurrido','proyectos.tiempo_real_total as tiempo_real','proyectos.autor as autor','proyectos.telefono as telefono','proyectos.correo as correo','proyectos.etapa as etapa')
+            ->select('tiempo_real_total','proyectos.id','responsables.nombre as responsable','proyectos.nombre as nombre','proyectos.created_at','proyecto_type.nombre as tipo','proyectos.tiempo_planificado_total as fecha_estimada','proyectos.tiempo_transcurrido_total as tiempo_transcurrido','proyectos.tiempo_real_total as tiempo_real','proyectos.autor as autor','proyectos.telefono as telefono','proyectos.correo as correo','proyectos.etapa as etapa')
             ->leftJoin('proyectos', 'solicitudes.id', '=', 'proyectos.solicitud_id')
             ->leftJoin('proyecto_type', 'proyectos.proyecto_type_id', '=', 'proyecto_type.id')
             ->leftJoin('responsable_proyecto', 'proyectos.id', '=', 'responsable_proyecto.proyecto_id')
             ->leftJoin('responsables', 'responsable_proyecto.responsable_id', '=', 'responsables.id')
             ->where('solicitudes.status','=','activa')
             ->where('proyectos.etapa','=','Publicado')
+            ->where('proyectos.finalizado','=','NO')
+            ->get();
+        $proyectos->listos = DB::table('solicitudes')
+            ->select('tiempo_real_total','proyectos.id','responsables.nombre as responsable','proyectos.nombre as nombre','proyectos.created_at','proyecto_type.nombre as tipo','proyectos.tiempo_planificado_total as fecha_estimada','proyectos.tiempo_transcurrido_total as tiempo_transcurrido','proyectos.tiempo_real_total as tiempo_real','proyectos.autor as autor','proyectos.telefono as telefono','proyectos.correo as correo','proyectos.etapa as etapa')
+            ->leftJoin('proyectos', 'solicitudes.id', '=', 'proyectos.solicitud_id')
+            ->leftJoin('proyecto_type', 'proyectos.proyecto_type_id', '=', 'proyecto_type.id')
+            ->leftJoin('responsable_proyecto', 'proyectos.id', '=', 'responsable_proyecto.proyecto_id')
+            ->leftJoin('responsables', 'responsable_proyecto.responsable_id', '=', 'responsables.id')
+            ->where('solicitudes.status','=','activa')
+            ->where('proyectos.etapa','=','Publicado')
+            ->where('proyectos.finalizado','=','SI')
             ->get();
         return $proyectos;
       }
@@ -90,6 +102,7 @@ class Proyecto extends Model
             ->leftJoin('responsables', 'responsable_proyecto.responsable_id', '=', 'responsables.id')
             ->leftJoin('solicitantes', 'solicitudes.solicitante_id', '=', 'solicitantes.id')
             ->where('solicitudes.status','=','activa')
+            ->where('proyectos.finalizado','=','NO')
             ->whereBetween('proyectos.created_at', array($rango_bajo, $rango_alto))
             ->get();
         $proyectos->preliminar = DB::table('solicitudes')
@@ -135,6 +148,7 @@ class Proyecto extends Model
             ->leftJoin('solicitantes', 'solicitudes.solicitante_id', '=', 'solicitantes.id')
             ->where('solicitudes.status','=','activa')
             ->where('proyectos.etapa','=','Publicado')
+            ->where('proyectos.finalizado','=','SI')
             ->whereBetween('proyectos.created_at', array($rango_bajo, $rango_alto))
             ->get();
         return $proyectos;

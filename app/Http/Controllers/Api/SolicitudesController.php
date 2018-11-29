@@ -70,6 +70,11 @@ class SolicitudesController extends Controller
             'fecha_entrega' => $entrega,
             'fecha_notificacion' => $notificar,
         ]);
+        $observacion = Observacion::create([
+            'actualizacion' => 'NO',
+            'titulo' => 'Activación de Solicitud',
+            'observacion' => 'Se activó la solicitud '.$solicitud->nombre,
+        ]);
     	return response()->json('Se activo la solicitud');
     }
 
@@ -86,6 +91,11 @@ class SolicitudesController extends Controller
     }
     public function crear_solicitud(Request $request ){
         $solicitud = Solicitudes::create($request->all());
+        $observacion = Observacion::create([
+            'actualizacion' => 'NO',
+            'titulo' => 'Creación de Solicitud',
+            'observacion' => 'Se creó la Solicitud '.$solicitud->nombre,
+        ]);
     	return response()->json($solicitud);
     }
     public function editar_solicitud(Request $request, $id ){

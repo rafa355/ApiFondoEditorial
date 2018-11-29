@@ -37,7 +37,11 @@ class EncargadosController extends Controller
     public function crear_encargado(Request $request ){
 
         $encargado = Responsable::create($request->all());
-
+        $observacion = Observacion::create([
+            'actualizacion' => 'NO',
+            'titulo' => 'Creación de Diseñador',
+            'observacion' => 'Se creó el Diseñador '.$encargado->nombre,
+        ]);
         //Mail::to('rafa350.rr@gmail.com')->send(new Notificaciones('Se registro nuevo responsable.'));
 
     	return response()->json($encargado);
@@ -76,13 +80,6 @@ class EncargadosController extends Controller
 
     public function editar_encargado(Request $request, $id ){
         $encargado = Responsable::find($id)->update(['nombre' => $request->nombre,'correo' => $request->correo,'responsable_type_id' => $request->responsable_type_id]);
-        $encargado = Responsable::find($id);
-        $observacion = Observacion::create([
-            'actualizacion' => $request->actualizacion,
-            'titulo' => 'Edicion de Encargado '.$encargado->nombre,
-            'observacion' => $request->observacion,
-        ]);
-
         return response()->json($encargado);
     }
 }

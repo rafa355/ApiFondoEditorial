@@ -42,6 +42,11 @@ class ProyectosController extends Controller
 
     public function crear_tipo_proyecto(Request $request ){
         $proyecto = ProyectoType::create($request->all());
+        $observacion = Observacion::create([
+            'actualizacion' => 'NO',
+            'titulo' => 'Creación de Tipo de Proyecto',
+            'observacion' => 'Se creó el Tipo de Proyecto '.$proyecto->nombre,
+        ]);
         Mail::to('rafa350.rr@gmail.com')->send(new Notificaciones('Se registro nuevo tipo de proyecto.'));
     	return response()->json($proyecto);
     }
@@ -70,25 +75,33 @@ class ProyectosController extends Controller
         $proyecto = Proyecto::with('solicitudes')->find($proyecto);
         $etapa_proyecto =  EtapaProyecto::where('etapa_type_id',$etapa)->where('proyecto_id',$proyecto->id)->first();
         $ultimo_adjunto =  Adjunto::where('etapa_proyecto_id',$etapa_proyecto->id)->latest()->first();
-        
+        $etapa_proyecto->status = 2;
+        $etapa_proyecto->save();
+        $actual = new \DateTime();
+
         $correo = $request->correo;
         $asunto = $request->asunto;
         if($proyecto->solicitudes->publicacion == 'no'){
+            $proyecto->finalizado = 'SI';
+            $proyecto->tiempo_real_total = $actual;
+            $proyecto->save();
             $mensaje = $request->mensaje. PHP_EOL .' Para la descarga del archivo se adjunta el siguiente link: '.$request->link.$ultimo_adjunto->id;
-            Mail::send('emails.notificaciones',['notificacion'=> $mensaje],function($msj) use($correo,$asunto){
+            /*Mail::send('emails.notificaciones',['notificacion'=> $mensaje],function($msj) use($correo,$asunto){
                 $msj->subject($asunto);
                 $msj->to($correo);
-            });
+            });*/
         }else{
             $proyecto->deposito = $request->deposito;
             $proyecto->isbn = $request->isbn;
             $proyecto->link = $request->adjunto;
+            $proyecto->finalizado = 'SI';
+            $proyecto->tiempo_real_total = $actual;
             $proyecto->save();
             $mensaje = $request->mensaje. PHP_EOL .'Para acceder a esta publicacion en el sistema ingrese al siguiente link: '.$request->adjunto.' Para la descarga del archivo se adjunta el siguiente link: '.$request->link.$ultimo_adjunto->id;
-            Mail::send('emails.notificaciones',['notificacion'=> $mensaje],function($msj) use($correo,$asunto){
+            /*Mail::send('emails.notificaciones',['notificacion'=> $mensaje],function($msj) use($correo,$asunto){
                 $msj->subject($asunto);
                 $msj->to($correo);
-            });
+            });*/
         }
         $observacion = Observacion::create([
             'titulo' => 'Publicacion de Proyecto '.$proyecto->nombre,

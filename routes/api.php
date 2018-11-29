@@ -245,4 +245,8 @@ Route::namespace("Api")->group(function(){
         'uses' => 'ContadorController@proyectos_generales',
         'as' => 'etapa',
     ]);
+    Route::get('ObtenerContadoresGenerales/',  [
+        'uses' => 'ContadorController@contadores_generales',
+        'as' => 'etapa',
+    ]);
 });

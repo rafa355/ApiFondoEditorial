@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Modelos\Observacion;
 use App\Modelos\Solicitudes;
 use App\Modelos\Proyecto;
+use App\Modelos\Responsable;
 
 class ObservacionesController extends Controller
 {
@@ -31,10 +32,10 @@ class ObservacionesController extends Controller
     	return response()->json($observacion);
     }
     public function crear_observacion_encargado(Request $request,$id ){
-        $solicitud = Solicitudes::find($id);
+        $responsable = Responsable::find($id);
         $observacion = Observacion::create([
             'actualizacion' => $request->actualizacion,
-            'titulo' => 'Edicion de Solicitud '.$solicitud->nombre,
+            'titulo' => 'Edicion de Diseñador '.$responsable->nombre,
             'observacion' => $request->observacion,
         ]);
         //Mail::to('rafa350.rr@gmail.com')->send(new Notificaciones('Se registro nueva observacion.'));
