@@ -51,10 +51,15 @@ class ProyectosController extends Controller
     	return response()->json($proyecto);
     }
 
-    public function eliminar_tipo_proyecto($id){
+    public function eliminar_tipo_proyecto(Request $request,$id){
         $tipo = ProyectoType::find($id);
         $tipo->status = 'eliminado';
         $tipo->save();
+        $observacion = Observacion::create([
+            'actualizacion' => $request->actualizacion,
+            'titulo' => 'Eliminación de Tipo de Proyecto '.$tipo->nombre,
+            'observacion' => $request->observacion,
+        ]);
     	return response()->json('Se Elimino');
     }
 

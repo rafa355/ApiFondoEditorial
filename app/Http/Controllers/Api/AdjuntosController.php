@@ -8,6 +8,7 @@ use App\Modelos\Adjunto;
 use App\Modelos\EtapaProyecto;
 use App\Modelos\Comentarios;
 use App\Modelos\Proyecto;
+use App\Modelos\Observacion;
 
 class AdjuntosController extends Controller
 {
@@ -80,7 +81,28 @@ class AdjuntosController extends Controller
         $adjunto = Adjunto::find($id);
         return response()->download($adjunto->ubicacion );
     }
+    public function eliminar_adjunto(Request $request,$id){
+        $adjunto = Adjunto::find($id);
+        $comentario = Comentarios::where('adjunto_id',$adjunto->id)->first();
 
+        if($adjunto->status == 3){
+            $etapa_proyecto = EtapaProyecto::find($adjunto->etapa_proyecto_id);
+            $etapa_proyecto->status = 3;
+            $etapa_proyecto->save();
+        }elseif($adjunto->status == 2){
+            $etapa_proyecto = EtapaProyecto::find($adjunto->etapa_proyecto_id);
+            $etapa_proyecto->status = 1;
+            $etapa_proyecto->save();
+        }
+        $comentario->delete();
+        $adjunto->delete();
+        $observacion = Observacion::create([
+            'actualizacion' => $request->actualizacion,
+            'titulo' => 'Eliminación de Adjunto',
+            'observacion' => $request->observacion,
+        ]);
+        return response()->json('borrado');
+    }
     public function revisar_adjunto(Request $request,$proyecto,$etapa){
 
         $etapa_proyecto =  EtapaProyecto::where('etapa_type_id',$etapa)->where('proyecto_id',$proyecto)->first();

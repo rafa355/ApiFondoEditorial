@@ -72,7 +72,7 @@ class EncargadosController extends Controller
         $encargado->save();
         $observacion = Observacion::create([
             'actualizacion' => $request->actualizacion,
-            'titulo' => 'Eliminación de encargado '.$encargado->nombre,
+            'titulo' => 'Eliminación de Diseñador '.$encargado->nombre,
             'observacion' => $request->observacion,
         ]);
     	return response()->json('Se eliminó el encargado');

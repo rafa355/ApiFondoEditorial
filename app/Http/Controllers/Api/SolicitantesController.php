@@ -26,10 +26,15 @@ class SolicitantesController extends Controller
     	return response()->json($solicitante);
     }
 
-    public function eliminar_solicitante($id){
+    public function eliminar_solicitante(Request $request,$id){
         $Solicitante = Solicitante::find($id);
         $Solicitante->status = 'eliminado';
         $Solicitante->save();
+        $observacion = Observacion::create([
+            'actualizacion' => $request->actualizacion,
+            'titulo' => 'Eliminación de Usuario/Cliente '.$Solicitante->nombre,
+            'observacion' => $request->observacion,
+        ]);
     	return response()->json('Se Elimino');
     }
 }
